@@ -1,11 +1,11 @@
 {
     "left_menu_icons":
     {
-        "menu": "data\\icons\\left_menu\\menu.png",
-        "home": "data\\icons\\left_menu\\home.png",
-        "goals_and_objectives": "data\\icons\\left_menu\\goals_and_objectives.png",
-        "statistics": "data\\icons\\left_menu\\statistics.png",
-        "settings": "data\\icons\\left_menu\\settings.png"
+        "menu": "data\\icons\\left_menu\\<theme>\\menu.png",
+        "home": "data\\icons\\left_menu\\<theme>\\home.png",
+        "goals_and_objectives": "data\\icons\\left_menu\\<theme>\\goals_and_objectives.png",
+        "statistics": "data\\icons\\left_menu\\<theme>\\statistics.png",
+        "settings": "data\\icons\\left_menu\\<theme>\\settings.png"
     },
     "icon_path": "data\\icons\\icon.ico",
     "theme": "default",

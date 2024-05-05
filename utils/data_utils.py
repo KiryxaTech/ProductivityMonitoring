@@ -1,5 +1,6 @@
 import json
 
+import customtkinter as ctk
 from customtkinter import CTkImage
 from PIL import Image
 
@@ -8,4 +9,4 @@ def read_json(fp: str) -> dict:
         return json.load(f)
     
 def load_img(icon_path):
-    return CTkImage(Image.open(icon_path), size=(25, 25))
+    return CTkImage(Image.open(icon_path.replace('<theme>', ctk.get_appearance_mode().lower())), size=(20, 20))

@@ -7,7 +7,7 @@ class ParentPage(CTkFrame):
 
         self.font = CTkFont('Segoe UI', 20, 'bold')
 
-        self.title = CTkLabel(self, width=200, height=50, font=self.font, text=title, anchor='w')
+        self.title = CTkLabel(self, width=200, height=40, font=self.font, text=title, anchor='w')
         self.title.place(x=10, y=0)
 
     def auto_place(self):
