@@ -3,7 +3,7 @@ import json
 import customtkinter as ctk
 from customtkinter import CTk
 
-import utils.data_utils as data_utils
+from utils import data_utils
 
 
 APP_NAME = 'ProductivityMonitoring'
@@ -15,6 +15,9 @@ APP_HEIGHT = 500
 class App(CTk):
     def __init__(self):
         super().__init__()
+
+        self.grid_rowconfigure(0, weight=1)
+        self.grid_columnconfigure(1, weight=1)
 
         self.settings = data_utils.read_json('data\\settings.json')
 
