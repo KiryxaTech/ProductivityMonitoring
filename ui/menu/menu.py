@@ -1,11 +1,13 @@
-import tkinter as tk
+import customtkinter as ctk
 from customtkinter import CTkFrame
 
+from utils import data_utils
 from ui.menu.menu_button import MenuButton
+from ui import colors
 
 class Menu(CTkFrame):
     def __init__(self, master):
-        super().__init__(master, width=50, corner_radius=0, fg_color='#222222')
+        super().__init__(master, width=50, corner_radius=0, fg_color=colors.DARK_LEFT_MENU)
 
     def add_button_top(self, menu_button: MenuButton):
         menu_button.top_place()

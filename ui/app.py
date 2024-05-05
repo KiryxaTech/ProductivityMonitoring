@@ -1,16 +1,22 @@
 import json
 
+import pywinstyles
 import customtkinter as ctk
 from customtkinter import CTk
 
-from utils import data_utils
-from ui import separator
-from ui.separator import Separator
+from ui import colors
+
 from ui.menu import icon
 from ui.menu.menu import Menu
+from ui.menu import menu_button
 from ui.menu.menu_button import MenuButton
-from ui.pages.home import HomePage
 
+from ui.pages.home import HomePage
+from ui.pages.goals_and_objectives import GoalsAndObjectivesPage
+from ui.pages.statistics import StatisticsPage
+from ui.pages.settings import SettingsPage
+
+from utils import data_utils
 
 APP_NAME = 'ProductivityMonitoring'
 APP_VERSION = '1.0'
@@ -30,34 +36,26 @@ class App(CTk):
         # app settings
         self.title(APP_NAME)
         self.geometry(f'{APP_WIDTH}x{APP_HEIGHT}')
-        self.minsize(400, 200)
+        self.minsize(450, 250)
         self.iconbitmap(self.settings['icon_path'])
 
         home_page = HomePage(self)
-        home_page.auto_place()
+        goals_and_objectives_page = GoalsAndObjectivesPage(self)
+        statistics_page = StatisticsPage(self)
+        settings_page = SettingsPage(self)
 
         left_menu = Menu(self)
 
-        menu_button = MenuButton(left_menu, icon.MENU, None)
-        left_menu.add_button_top(menu_button)
-
-        home_button = MenuButton(left_menu, icon.HOME, HomePage)
-        left_menu.add_button_top(home_button)
-
-        goals_and_objectives_button = MenuButton(left_menu, icon.GOALS_AND_OBJECTIVES, None)
-        left_menu.add_button_top(goals_and_objectives_button)
-
-        statistics_button = MenuButton(left_menu, icon.STATISTICS, None)
-        left_menu.add_button_top(statistics_button)
-
-        settings_button = MenuButton(left_menu, icon.SETTINGS, None)
-        left_menu.add_button_bottom(settings_button)
+        main_button = MenuButton(left_menu, icon.MAIN, None)
+        home_button = MenuButton(left_menu, icon.HOME, home_page)
+        goals_and_objectives_button = MenuButton(left_menu, icon.GOALS_AND_OBJECTIVES, goals_and_objectives_page)
+        statistics_button = MenuButton(left_menu, icon.STATISTICS, statistics_page)
+        settings_button = MenuButton(left_menu, icon.SETTINGS, settings_page, menu_button.BOTTOM)
 
         left_menu.auto_place()
-
-        separator1 = Separator(self, separator.VERTICAL, 2000)
-        separator1.place(x=50, y=0)
+        home_button.show_linked_page()
 
     def show_window(self):
         ctk.set_appearance_mode(self.settings['theme'])
+        pywinstyles.change_header_color(self, colors.DARK_HEADER)
         self.mainloop()

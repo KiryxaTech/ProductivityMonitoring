@@ -8,9 +8,9 @@ class Separator(CTkFrame):
 
         if orientation == HORIZONTAL:
             width = line_size
-            height = 2
+            height = 1
         elif orientation == VERTICAL:
-            width = 2
+            width = 1
             height = line_size
         else:
             raise AttributeError(f"attribute '{orientation}' has not definied. Args: separator.HORISONTAL, separator.VERTICAL")

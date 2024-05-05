@@ -1,9 +1,13 @@
+import customtkinter as ctk
 from customtkinter import CTkFrame, CTkLabel
 from customtkinter import CTkFont
 
+from utils import data_utils
+from ui import colors
+
 class ParentPage(CTkFrame):
     def __init__(self, master, title: str):
-        super().__init__(master, fg_color='#323232', corner_radius=0)
+        super().__init__(master, fg_color=colors.DARK_FG_PAGE, bg_color=colors.DARK_BG_PAGE, corner_radius=10)
 
         self.font = CTkFont('Segoe UI', 20, 'bold')
 
