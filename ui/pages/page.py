@@ -2,12 +2,12 @@ import customtkinter as ctk
 from customtkinter import CTkFrame, CTkLabel
 from customtkinter import CTkFont
 
-from utils import data_utils
+from utils import data
 from ui import colors
 
-class ParentPage(CTkFrame):
+class Page(CTkFrame):
     def __init__(self, master, title: str):
-        super().__init__(master, fg_color=colors.DARK_FG_PAGE, bg_color=colors.DARK_BG_PAGE, corner_radius=10)
+        super().__init__(master, fg_color=colors.FG_PAGE, bg_color=colors.BG_PAGE, corner_radius=10)
 
         self.font = CTkFont('Segoe UI', 20, 'bold')
 

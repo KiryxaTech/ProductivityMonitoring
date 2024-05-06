@@ -9,6 +9,15 @@
     },
     "colors":
     {
+        "light":
+        {
+            "header": "#62d1d2",
+            "left_menu": "#62d1d2",
+            "left_button": "transparent",
+            "left_button_active": "#0fbb71",
+            "bg_page": "#62d1d2",
+            "fg_page": "#f7f7f7"
+        },
         "dark":
         {
             "header": "#2a3441",
@@ -16,11 +25,11 @@
             "left_button": "transparent",
             "left_button_active": "#445469",
             "bg_page": "#2a3441",
-            "fg_page": "#141414"
+            "fg_page": "#221f1f"
         }
     },
     "icon_path": "data\\icons\\icon.ico",
-    "theme": "default",
+    "theme": "dark",
     "language": "russian",
     "region": "USA"
 }

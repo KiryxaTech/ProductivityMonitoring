@@ -1,13 +1,24 @@
-from utils.data_utils import read_json
+import customtkinter as ctk
+from utils import data
 
-colors = read_json('data\\settings.json')['colors']
+LIGHT = 'light'
+DARK = 'dark'
+LIGHT_ID = 0
+DARK_ID = 1
 
-light_colors = 0
-dark_colors = colors['dark']
+def get_system_theme_id():
+    return LIGHT_ID if ctk.get_appearance_mode().lower() == LIGHT else DARK_ID
 
-DARK_HEADER = dark_colors['header']
-DARK_LEFT_MENU = dark_colors['left_menu']
-DARK_LEFT_BUTTON = dark_colors['left_button']
-DARK_LEFT_BUTTON_ACTIVE = dark_colors['left_button_active']
-DARK_BG_PAGE = dark_colors['bg_page']
-DARK_FG_PAGE = dark_colors['fg_page']
+colors = data.get_settings()['colors']
+def get_color_list(name):
+    color_list = [colors[LIGHT][name], colors[DARK][name]]
+    if 'transparent' in color_list:
+        return 'transparent'
+    return color_list
+
+HEADER = get_color_list('header')
+LEFT_MENU = get_color_list('left_menu')
+LEFT_BUTTON = get_color_list('left_button')
+LEFT_BUTTON_ACTIVE = get_color_list('left_button_active')
+BG_PAGE = get_color_list('bg_page')
+FG_PAGE = get_color_list('fg_page')
