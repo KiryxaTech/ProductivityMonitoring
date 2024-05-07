@@ -1,35 +1,33 @@
 {
-    "left_menu_icons":
-    {
+    "left_menu_icons": {
         "main": "data\\icons\\left_menu\\<theme>\\main.png",
         "home": "data\\icons\\left_menu\\<theme>\\home.png",
         "goals_and_objectives": "data\\icons\\left_menu\\<theme>\\goals_and_objectives.png",
         "statistics": "data\\icons\\left_menu\\<theme>\\statistics.png",
         "settings": "data\\icons\\left_menu\\<theme>\\settings.png"
     },
-    "colors":
-    {
-        "light":
-        {
+    "colors": {
+        "light": {
             "header": "#62d1d2",
             "left_menu": "#62d1d2",
             "left_button": "transparent",
             "left_button_active": "#0fbb71",
             "bg_page": "#62d1d2",
-            "fg_page": "#f7f7f7"
+            "fg_page": "#f7f7f7",
+            "dropdown_fg": "#62d1d2"
         },
-        "dark":
-        {
+        "dark": {
             "header": "#2a3441",
             "left_menu": "#2a3441",
             "left_button": "transparent",
             "left_button_active": "#445469",
             "bg_page": "#2a3441",
-            "fg_page": "#221f1f"
+            "fg_page": "#221f1f",
+            "dropdown_fg": "#2a3441"
         }
     },
     "icon_path": "data\\icons\\icon.ico",
-    "theme": "dark",
+    "theme": "light",
     "language": "russian",
     "region": "USA"
 }

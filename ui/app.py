@@ -33,6 +33,8 @@ class App(CTk):
         ctk.set_appearance_mode(self.settings['theme'])
         ctk.set_default_color_theme('green')
 
+        #pywinstyles.apply_style(self, 'acrylic')
+
         self.grid_rowconfigure(0, weight=1)
         self.grid_columnconfigure(1, weight=1)
 
