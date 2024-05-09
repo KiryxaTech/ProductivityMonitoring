@@ -23,4 +23,3 @@ def set_theme(theme) -> None:
         settings['theme'] = colors.DARK
 
     data.set_settings(settings)
-    print(theme)
