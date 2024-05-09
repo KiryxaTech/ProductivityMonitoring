@@ -11,7 +11,7 @@ class SettingFrame(CTkFrame):
         super().__init__(master, fg_color='#fff', height=100)
 
         self.font = CTkFont(
-            'Segoe UI',
+            'Segoe Ui',
             size=20
         )
         self.title_label = CTkLabel(

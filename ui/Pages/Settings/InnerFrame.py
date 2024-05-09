@@ -1,10 +1,10 @@
 from customtkinter import CTkFrame
 
-from ui import colors
+from Ui import Colors
 
 class InnerFrame(CTkFrame):
     def __init__(self, master):
-        super().__init__(master, fg_color=colors.SETTINGS_PAGE_INNER_FRAME, corner_radius=7)
+        super().__init__(master, fg_color=Colors.SETTINGS_PAGE_INNER_FRAME, corner_radius=7)
 
         self.columnconfigure(0, weight=1)
         #self.rowconfigure([0,1,2,3,4], weight=1)

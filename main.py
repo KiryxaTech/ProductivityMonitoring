@@ -1,5 +1,5 @@
-from ui.app import App
-from ui.tray import Tray
+from Ui.App import App
+from Ui.Tray import Tray
 
 def main():
     app = App()

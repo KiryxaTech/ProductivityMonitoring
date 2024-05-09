@@ -3,7 +3,7 @@ import pywinstyles
 import customtkinter as ctk
 
 from utils import data
-from ui import app, colors
+from Ui import app, colors
 
 def set_theme(theme) -> None:
     settings = data.get_settings()

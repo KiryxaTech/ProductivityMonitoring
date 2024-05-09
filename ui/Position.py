@@ -1,0 +1,2 @@
+TOP = 0
+BOTTOM = 1
