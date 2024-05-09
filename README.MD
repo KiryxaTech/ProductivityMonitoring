@@ -1,2 +1,2 @@
 # ProductivityMonitoring
-Это десктопное приложение позволит следить за продуктивностью на протяжении дня, ставить цели и задачи, а также просматривать статистику продуктивности. Вы можете создать аккаунт через вход в Google.
+This desktop application will allow you to track your productivity level, set tasks and goals, and track their implementation.
