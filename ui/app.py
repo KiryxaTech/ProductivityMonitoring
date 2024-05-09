@@ -1,5 +1,3 @@
-import json
-
 import pywinstyles
 import customtkinter as ctk
 from customtkinter import CTk
@@ -18,6 +16,7 @@ from ui.pages.settings import SettingsPage
 
 from utils import data
 
+
 APP_NAME = 'ProductivityMonitoring'
 APP_VERSION = '1.0'
 APP_WIDTH = 1000
@@ -32,8 +31,6 @@ class App(CTk):
         self.settings = data.read_json('data\\settings.json')
         ctk.set_appearance_mode(self.settings['theme'])
         ctk.set_default_color_theme('green')
-
-        #pywinstyles.apply_style(self, 'acrylic')
 
         self.grid_rowconfigure(0, weight=1)
         self.grid_columnconfigure(1, weight=1)
@@ -60,6 +57,7 @@ class App(CTk):
 
         left_menu.auto_place()
         home_button.show_linked_page()
+
 
     def show_window(self):
         pywinstyles.change_header_color(self, colors.HEADER[colors.get_system_theme_id()])

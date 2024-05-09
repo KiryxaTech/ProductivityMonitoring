@@ -8,7 +8,9 @@ from ui import colors
 
 class Menu(CTkFrame):
     def __init__(self, master):
-        super().__init__(master, width=50, corner_radius=0, fg_color=colors.LEFT_MENU)
+        super().__init__(master, width=51, corner_radius=0, fg_color=colors.LEFT_MENU, border_width=0)
+
+        self.pack_propagate(False)
 
     def add_button_top(self, menu_button: MenuButton):
         menu_button.top_place()
