@@ -49,5 +49,5 @@ class SettingsPage(Page):
         inner_frame = InnerFrame(self)
         inner_frame.auto_place()
 
-        theme_frame = SettingFrame(inner_frame, 'Theme')
+        theme_frame = SettingFrame(inner_frame, 'Theme', ('System', 'Light', 'Dark'))
         theme_frame.auto_place()

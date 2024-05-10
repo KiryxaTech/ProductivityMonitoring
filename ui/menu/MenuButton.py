@@ -9,8 +9,6 @@ from Ui.Pages.Pages import Page
 
 
 class MenuButton(CTkButton):
-    menu_is_opened = False
-    width = 51
     buttons: CTkButton = []
     linked_pages: Page = []
 
