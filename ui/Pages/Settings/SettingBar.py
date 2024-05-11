@@ -1,18 +1,21 @@
 import tkinter as tk
 
+import darkdetect
 import customtkinter as ctk
 from customtkinter import CTkFrame, CTkLabel, CTkOptionMenu
 from customtkinter import CTkFont
 
 from Ui import Colors
 
+from utils.data import *
 
-class SettingFrame(CTkFrame):
+class SettingBar(CTkFrame):
     def __init__(self,
                  master: CTkFrame|tk.Tk|ctk.CTk,
                  title: str,
 
-                 option_menu_values: list|tuple = None):
+                 option_menu_values: list|tuple = None,
+                 command = None):
         
         super().__init__(master=master,
                          fg_color=Colors.BAR,
@@ -27,9 +30,12 @@ class SettingFrame(CTkFrame):
         
         self.title_label.pack(side=tk.LEFT, padx=5)
 
+        option_menu_var = tk.Variable(value=get_settings()['theme'].capitalize())
         self.option_menu = CTkOptionMenu(
             master=self,
-            values=option_menu_values
+            values=option_menu_values,
+            command=command,
+            variable=option_menu_var
         )
         self.option_menu.pack(side=tk.RIGHT, padx=5)
 

@@ -4,7 +4,9 @@ from customtkinter import CTkFont
 
 from Ui import Colors
 from Ui.Pages.Settings.InnerFrame import InnerFrame
-from Ui.Pages.Settings.SettingFrame import SettingFrame
+from Ui.Pages.Settings.SettingBar import SettingBar
+
+from utils import settings
 
 class Page(CTkFrame):
     def __init__(self, master, name: str):
@@ -49,5 +51,5 @@ class SettingsPage(Page):
         inner_frame = InnerFrame(self)
         inner_frame.auto_place()
 
-        theme_frame = SettingFrame(inner_frame, 'Theme', ('System', 'Light', 'Dark'))
+        theme_frame = SettingBar(inner_frame, 'Theme', ('System', 'Light', 'Dark'), command=settings.set_theme)
         theme_frame.auto_place()
