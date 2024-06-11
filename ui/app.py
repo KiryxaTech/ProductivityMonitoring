@@ -1,3 +1,4 @@
+from logging import getLogger
 import tkinter as tk
 
 import pywinstyles
@@ -17,6 +18,7 @@ from Ui.Pages.Pages import *
 
 from utils import data
 
+logger = getLogger(__name__)
 
 APP_NAME = 'ProductivityMonitoring'
 APP_VERSION = '1.0'
@@ -27,7 +29,7 @@ APP_MIN_HEIGHT = 350
 
 
 class App(CTk):
-    def __init__(self):
+    def __init__(self):        
         super().__init__(fg_color=Colors.BG_PAGE)
         self.settings = data.read_json('data\\settings.json')
         ctk.set_appearance_mode(self.settings['theme'])
@@ -59,6 +61,8 @@ class App(CTk):
         left_menu.auto_place()
         home_button.show_linked_page()
 
+        self.show_window()
+
 
     def show_window(self):
         pywinstyles.change_header_color(self, Colors.HEADER[Colors.get_system_theme_id()])
@@ -66,4 +70,6 @@ class App(CTk):
         self.minsize(APP_MIN_WIDTH, APP_MIN_HEIGHT)
         self.wm_geometry(f'+200+100')
 
+        logger.debug('Show window')
         self.mainloop()
+        logger.debug('Hide window')

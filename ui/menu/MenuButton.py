@@ -1,3 +1,4 @@
+from logging import getLogger
 import tkinter as tk
 
 from customtkinter import CTkButton
@@ -8,9 +9,10 @@ from Ui import Position
 from Ui.Pages.Pages import Page
 
 
+logger = getLogger(__name__)
+
+
 class MenuButton(CTkButton):
-    menu_is_opened = False
-    width = 51
     buttons: CTkButton = []
     linked_pages: Page = []
 
@@ -47,6 +49,7 @@ class MenuButton(CTkButton):
         MenuButton.linked_pages.append(linked_page)
 
     def show_linked_page(self):
+        logger.debug("Show page '%s'", self.name)
         for page in MenuButton.linked_pages:
             page.grid_forget()
         for button in MenuButton.buttons:

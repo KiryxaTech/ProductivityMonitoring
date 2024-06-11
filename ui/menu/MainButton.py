@@ -1,3 +1,4 @@
+from logging import getLogger
 import tkinter as tk
 
 from customtkinter import CTkFrame
@@ -7,6 +8,9 @@ from customtkinter import CTkFont
 from Ui import Colors
 from Ui.Menu import Icons
 from Ui.Menu.MenuButton import MenuButton
+
+
+logger = getLogger(__name__)
 
 
 class MainButton(CTkButton):
@@ -66,11 +70,13 @@ class MainButton(CTkButton):
             self.configure(text=self.name)
             for button in MenuButton.buttons:
                 button.configure(text=button.get_name())
+            logger.debug('Open menu')
             return
 
         self.after(10, self.open_menu)
 
     def close_menu(self):
+        logger.debug('Close menu')
         self.configure(text=None)
         for button in MenuButton.buttons:
             button.configure(text=None)
