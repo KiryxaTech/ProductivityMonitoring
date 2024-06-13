@@ -7,31 +7,44 @@
         "settings": "data\\icons\\left_menu\\<theme>\\settings.png"
     },
     "colors": {
-        "light": {
-            "header": "#62d1d2",
-            "left_menu": "#62d1d2",
-            "left_button": "transparent",
-            "left_button_active": "#0fbb71",
-            "bg_page": "#62d1d2",
-            "fg_page": "#f7f7f7",
-            "dropdown_fg": "#62d1d2",
-            "settings_page_inner_frame": "#62d1d2",
-            "separate_line": "#62d1d2"
-        },
-        "dark": {
-            "header": "#2a3441",
-            "left_menu": "#2a3441",
-            "left_button": "transparent",
-            "left_button_active": "#445469",
-            "bg_page": "#2a3441",
-            "fg_page": "#221f1f",
-            "dropdown_fg": "#2a3441",
-            "settings_page_inner_frame": "#2e2e2e",
-            "separate_line": "#2e2e2e"
-        }
+        "header": [
+            "#62d1d2",
+            "#2a3441"
+        ],
+        "menu": [
+            "#62d1d2",
+            "#2a3441"
+        ],
+        "menu_button": "transparent",
+        "menu_button_active": [
+            "#0fbb71",
+            "#445469"
+        ],
+        "separate_line": [
+            "#62d1d2",
+            "#2e2e2e"
+        ],
+        "page_background": [
+            "#62d1d2",
+            "#2a3441"
+        ],
+        "page_foreground": [
+            "#f7f7f7",
+            "#221f1f"
+        ],
+        "option_menu_dropdown_foreground": [
+            "#62d1d2",
+            "#2a3441"
+        ],
+        "settings_page_inner_frame": "transparent",
+        "bar": [
+            "#fbfbfb",
+            "#2b2b2b"
+        ]
     },
     "icon_path": "data\\icons\\icon.ico",
-    "theme": "system",
-    "language": "russian",
+    "theme": "Dark",
+    "accent": "green",
+    "language": "english",
     "region": "USA"
 }

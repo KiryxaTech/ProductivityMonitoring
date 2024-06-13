@@ -1,12 +1,7 @@
-import tkinter as tk
-
-import customtkinter as ctk
 from customtkinter import CTkFrame
 
-from Ui.Menu.MenuButton import MenuButton
-from Ui.Menu.MainButton import MainButton
-
 from Ui import Colors
+from Ui.Menu.MenuButton import MenuButton
 
 
 class Menu(CTkFrame):
