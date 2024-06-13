@@ -9,6 +9,7 @@ from programtools.program import Program
 
 ICON = Image.open(Path(r'data\icons\icon.ico'))
 
+
 class Tray(Icon):
     def __init__(self):
         super().__init__(

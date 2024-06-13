@@ -2,13 +2,17 @@ import logging
 from customtkinter import CTkImage
 from PIL import Image, UnidentifiedImageError
 
+
 logger = logging.getLogger(__name__)
+
 
 BASE_PATH = "data\\icons\\left_menu\\"
 ICONS = ["main", "home", "goals_and_objectives", "statistics", "settings"]
 
+
 def get_icon_path(name, theme):
     return f"{BASE_PATH}{theme}\\{name}.png"
+
 
 def get_icon(name) -> CTkImage:
     try:
@@ -25,6 +29,7 @@ def get_icon(name) -> CTkImage:
             dark_image=placeholder,
             size=(20, 20)
         )
+
 
 MAIN = get_icon('main')
 HOME = get_icon('home')

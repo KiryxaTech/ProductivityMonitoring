@@ -9,12 +9,15 @@ DARK = 'dark'
 LIGHT_ID = 0
 DARK_ID = 1
 
+
 def get_system_theme_id():
     return LIGHT_ID if ctk.get_appearance_mode().lower() == LIGHT else DARK_ID
+
 
 colors = Settings.get_value('colors')
 def get_color(name) -> list | str:
     return colors[name]
+
 
 HEADER = get_color('header')
 LEFT_MENU = get_color('menu')
