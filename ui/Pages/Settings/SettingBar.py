@@ -7,7 +7,7 @@ from customtkinter import CTkFont
 
 from Ui import Colors
 
-from utils.data import *
+from programtools.settings import Settings
 
 class SettingBar(CTkFrame):
     def __init__(self,
@@ -30,7 +30,7 @@ class SettingBar(CTkFrame):
         
         self.title_label.pack(side=tk.LEFT, padx=5)
 
-        option_menu_var = tk.Variable(value=get_settings()['theme'].lower())
+        option_menu_var = tk.Variable(value=Settings.get_value('theme'))
         self.option_menu = CTkOptionMenu(
             master=self,
             values=option_menu_values,

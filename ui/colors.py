@@ -1,5 +1,8 @@
+# Авторские права (c) KiryxaTechDev.
+
 import customtkinter as ctk
-from utils import data
+
+from programtools.settings import Settings
 
 LIGHT = 'light'
 DARK = 'dark'
@@ -9,7 +12,7 @@ DARK_ID = 1
 def get_system_theme_id():
     return LIGHT_ID if ctk.get_appearance_mode().lower() == LIGHT else DARK_ID
 
-colors = data.get_settings()['colors']
+colors = Settings.get_value('colors')
 def get_color(name) -> list | str:
     return colors[name]
 

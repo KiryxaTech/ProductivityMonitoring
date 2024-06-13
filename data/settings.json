@@ -43,7 +43,8 @@
         ]
     },
     "icon_path": "data\\icons\\icon.ico",
-    "theme": "system",
+    "theme": "Dark",
+    "accent": "green",
     "language": "english",
     "region": "USA"
 }

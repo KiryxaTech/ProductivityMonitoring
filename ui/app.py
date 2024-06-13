@@ -1,8 +1,5 @@
 from logging import getLogger
-import tkinter as tk
 
-import pywinstyles
-import customtkinter as ctk
 from customtkinter import CTk
 
 from Ui import Colors
@@ -15,8 +12,8 @@ from Ui.Menu.MainButton import MainButton
 from Ui.Menu.MenuButton import MenuButton
 
 from Ui.Pages.Pages import *
-
-from utils import data
+from programtools.personalization import Personalization
+from programtools.settings import Settings
 
 logger = getLogger(__name__)
 
@@ -29,47 +26,64 @@ APP_MIN_HEIGHT = 350
 
 
 class App(CTk):
-    def __init__(self):        
+    def __init__(self) -> None: 
         super().__init__(fg_color=Colors.BG_PAGE)
-        self.settings = data.read_json('data\\settings.json')
-        ctk.set_appearance_mode(self.settings['theme'])
-        ctk.set_default_color_theme('green')
+        # Ставит тему приложения.
+        Personalization.change_default_theme()
 
+        # Добавляет весы размещения объектов.
         self.grid_rowconfigure(0, weight=1)
         self.grid_columnconfigure(1, weight=1)
 
+        # Настройки окна.
+        self.title(APP_NAME) # Название
+        self.geometry(f'{APP_WIDTH}x{APP_HEIGHT}') # Размеры
+        self.iconbitmap(Settings.get_value('icon_path')) # Иконка
+        self.minsize(APP_MIN_WIDTH, APP_MIN_HEIGHT) # Минимальный размер
+        self.wm_geometry(f'+200+100') # Отступы от краёв экрана
 
-        # app settings
-        self.title(APP_NAME)
-        self.geometry(f'{APP_WIDTH}x{APP_HEIGHT}')
-        self.minsize(APP_WIDTH, APP_HEIGHT)
-        self.iconbitmap(self.settings['icon_path'])
-
+        # Создание страниц приложения.
         home_page = HomePage(self)
         goals_and_objectives_page = GoalsAndObjectivesPage(self)
         statistics_page = StatisticsPage(self)
         settings_page = SettingsPage(self)
 
-        left_menu = Menu(self)
+        # Создание меню приложения.
+        menu = Menu(self)
+        menu.auto_place()
 
-        main_button = MainButton(left_menu)
-        home_button = MenuButton(left_menu, Icons.HOME, home_page)
-        goals_and_objectives_button = MenuButton(left_menu, Icons.GOALS_AND_OBJECTIVES, goals_and_objectives_page)
-        statistics_button = MenuButton(left_menu, Icons.STATISTICS, statistics_page)
-        settings_button = MenuButton(left_menu, Icons.SETTINGS, settings_page, Position.BOTTOM)
+        # Создание кнопок в меню.
+        main_button = MainButton(menu)
 
-        left_menu.auto_place()
+        home_button = MenuButton(menu,
+                                 Icons.HOME,
+                                 home_page)
+        home_button.top_place()
+        
+        goals_and_objectives_button = MenuButton(menu,
+                                                 Icons.GOALS_AND_OBJECTIVES,
+                                                 goals_and_objectives_page)
+        goals_and_objectives_button.top_place()
+        
+        statistics_button = MenuButton(menu,
+                                       Icons.STATISTICS,
+                                       statistics_page)
+        statistics_button.top_place()
+        
+        settings_button = MenuButton(menu,
+                                     Icons.SETTINGS,
+                                     settings_page,
+                                     Position.BOTTOM)
+        settings_button.top_place()
+
+        # Отображает домашнюю страницу.
         home_button.show_linked_page()
 
-        self.show_window()
-
-
-    def show_window(self):
-        pywinstyles.change_header_color(self, Colors.HEADER[Colors.get_system_theme_id()])
-
-        self.minsize(APP_MIN_WIDTH, APP_MIN_HEIGHT)
-        self.wm_geometry(f'+200+100')
-
-        logger.debug('Show window')
-        self.mainloop()
-        logger.debug('Hide window')
+    def show_window(self) -> None:
+        try:
+            logger.debug('Show window.')
+            self.mainloop()
+        except Exception as e:
+            logger.error(f"Error running main loop: {e}")
+        finally:
+            logger.debug('Hide window.')

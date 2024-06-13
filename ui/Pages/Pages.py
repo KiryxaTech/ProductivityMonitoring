@@ -6,7 +6,7 @@ from Ui import Colors
 from Ui.Pages.Settings.InnerFrame import InnerFrame
 from Ui.Pages.Settings.SettingBar import SettingBar
 
-from utils import settings
+from programtools.personalization import Personalization
 
 class Page(CTkFrame):
     def __init__(self, master, name: str):
@@ -51,5 +51,5 @@ class SettingsPage(Page):
         inner_frame = InnerFrame(self)
         inner_frame.auto_place()
 
-        theme_frame = SettingBar(inner_frame, 'Theme', ('System', 'Light', 'Dark'), command=settings.set_theme)
+        theme_frame = SettingBar(inner_frame, 'Theme', ('System', 'Light', 'Dark'), command=Personalization.change_theme)
         theme_frame.auto_place()
