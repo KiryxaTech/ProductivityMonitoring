@@ -42,6 +42,7 @@ class Personalization(metaclass=StaticMeta):
         logger.debug(f"Get theme '{theme}'")
 
         # Записываем новую тему в настройки.
+        logger.debug(f"Theme update on '{theme}' (settings.json)")
         Settings.replace_value('theme', theme)
 
         # Определяем тему системы для 'System'
@@ -101,13 +102,8 @@ class Personalization(metaclass=StaticMeta):
         """
         logger.debug("Set color theme '%s'", theme)
 
-        theme = Personalization.parse_theme(theme)
-
-        # Установка темы для приложения.
-        if theme in Personalization.themes:
-            Personalization.set_theme(theme)
-        else:
-            logger.warning("Theme '%s' not found in themes.", theme)
+        # Установка темы.
+        Personalization.set_theme(theme)
 
         # Установка акцентного цвета в зависитмости от темы.
         match theme:
