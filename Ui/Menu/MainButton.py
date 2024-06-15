@@ -5,6 +5,7 @@ from customtkinter import CTkFrame
 from customtkinter import CTkButton
 from customtkinter import CTkFont
 
+from programtools.personalization import Colors
 from Ui import Colors
 from Ui.Menu import Icons
 from Ui.Menu.MenuButton import MenuButton

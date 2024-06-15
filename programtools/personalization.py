@@ -1,5 +1,6 @@
 # Авторские права (c) KiryxaTechDev.
 
+from pathlib import Path
 from logging import getLogger
 from typing import Literal
 
@@ -15,7 +16,105 @@ from programtools.settings import Settings
 logger = getLogger(__name__)
 
 
-class Personalization(metaclass=StaticMeta):
+class Color:
+    """
+    Класс цвета, который использует значения из конфигурационного файла.
+    """
+
+    # Константы для идентификации темы
+    LIGHT = 'Light'
+    DARK = 'Dark'
+    LIGHT_ID = 0
+    DARK_ID = 1
+
+    def __init__(self, name: Literal['header', 'menu', 'menu_button', 
+                                      'menu_button_active', 'page_bg', 
+                                      'page_fg', 'dropdown_fg', 
+                                      'inner_frame', 'separate_line', 
+                                      'bar']):
+        """
+        Инициализирует экземпляр класса Color.
+
+        :param name: Название цвета из предопределенного списка.
+        :type name: Literal
+        """
+        self._name = name
+        self._colors = self._load_colors_from_config()
+        self._value = self._get_color(name)
+
+    def __new__(cls, name):
+        """
+        Создает новый экземпляр класса Color и возвращает строковое значение цвета.
+
+        :param name: Название цвета.
+        :type name: str
+
+        :return: Строковое представление цвета.
+        :rtype: str
+        """
+        instance = super().__new__(cls)
+        instance._colors = instance._load_colors_from_config()
+        instance._value = instance._get_color(name)
+        return instance._value
+
+    @staticmethod
+    def _get_system_theme_id() -> int:
+        """
+        Получает идентификатор текущей темы системы.
+
+        :return: Идентификатор темы системы.
+        :rtype: int
+        """
+        return Color.LIGHT_ID if ctk.get_appearance_mode() == Color.LIGHT else Color.DARK_ID
+
+    def _load_colors_from_config(self) -> dict:
+        """
+        Загружает цвета из конфигурационного файла.
+
+        :return: Словарь с загруженными цветами.
+        :rtype: dict
+        """
+        colors = {}
+        try:
+            with open(r'data\colors.config', 'r') as file:
+                for line in file:
+                    name, value = line.strip().split(': ')
+                    colors[name] = value.split(', ')
+                    logger.debug(f'Loaded color {name}: {colors[name]}')
+        except Exception as e:
+            logger.error(f'Error loading colors from config: {e}')
+
+        return colors
+
+    def _get_color(self, name: str):
+        """
+        Получает значение цвета по имени и текущей теме.
+
+        :param name: Название цвета.
+        :type name: str
+
+        :return: Список значений цвета для разных тем или строку 'transparent'.
+        """
+        
+        try:
+            color_values = self._colors.get(name)
+            
+            if color_values is None:
+                logger.error(f'Color {name} not found in config.')
+                return 'transparent'
+            
+            # Возвращаем список значений, если цвет имеет значения для разных тем
+            # Возвращаем строку 'transparent', если цветом является transparent
+            if color_values == ['transparent']:
+                return 'transparent'
+            return color_values
+        
+        except Exception as e:
+            logger.error(f'Error retrieving color {name}: {e}')
+            return 'transparent'
+
+
+class Personalization:
     """
     Класс персонализации.
     """
@@ -23,12 +122,12 @@ class Personalization(metaclass=StaticMeta):
         'Light': {
             'theme': 'light',
             'accent_color': 'green',
-            'header_color': Colors.HEADER[Colors.LIGHT_ID]
+            'header_color': Color('header')[0]
         },
         'Dark': {
             'theme': 'dark',
             'accent_color': 'dark-blue',
-            'header_color': Colors.HEADER[Colors.DARK_ID]
+            'header_color': Color('header')[1]
         }
     }
 
@@ -87,7 +186,8 @@ class Personalization(metaclass=StaticMeta):
 
         # Определяем цвет заголовка для 'System'.
         theme = Personalization.parse_theme(theme)
-        header = Settings.get_value('colors')['header'][0 if theme == 'Light' else 1]
+        print(Color('header'))
+        header = Color('header')[Color._get_system_theme_id()]
         
         # Изменяем цвет заголовка.
         logger.debug(f"Change header '{theme}'.")

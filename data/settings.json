@@ -1,47 +1,4 @@
 {
-    "left_menu_icons": {
-        "main": "data\\icons\\left_menu\\<theme>\\main.png",
-        "home": "data\\icons\\left_menu\\<theme>\\home.png",
-        "goals_and_objectives": "data\\icons\\left_menu\\<theme>\\goals_and_objectives.png",
-        "statistics": "data\\icons\\left_menu\\<theme>\\statistics.png",
-        "settings": "data\\icons\\left_menu\\<theme>\\settings.png"
-    },
-    "colors": {
-        "header": [
-            "#62d1d2",
-            "#2a3441"
-        ],
-        "menu": [
-            "#62d1d2",
-            "#2a3441"
-        ],
-        "menu_button": "transparent",
-        "menu_button_active": [
-            "#0fbb71",
-            "#445469"
-        ],
-        "separate_line": [
-            "#62d1d2",
-            "#2e2e2e"
-        ],
-        "page_background": [
-            "#62d1d2",
-            "#2a3441"
-        ],
-        "page_foreground": [
-            "#f7f7f7",
-            "#221f1f"
-        ],
-        "option_menu_dropdown_foreground": [
-            "#62d1d2",
-            "#2a3441"
-        ],
-        "settings_page_inner_frame": "transparent",
-        "bar": [
-            "#fbfbfb",
-            "#2b2b2b"
-        ]
-    },
     "icon_path": "data\\icons\\icon.ico",
     "theme": "System",
     "accent": "green",

@@ -4,8 +4,7 @@ import customtkinter as ctk
 from customtkinter import CTkFrame, CTkLabel, CTkOptionMenu
 from customtkinter import CTkFont
 
-from Ui import Colors
-
+from programtools.personalization import Color
 from programtools.settings import Settings
 
 
@@ -18,7 +17,7 @@ class SettingBar(CTkFrame):
                  command = None):
         
         super().__init__(master=master,
-                         fg_color=Colors.BAR,
+                         fg_color=Color('bar'),
                          corner_radius=7)
 
         self.font = CTkFont('Segoe UI', size=20)

@@ -2,7 +2,7 @@ from customtkinter import CTkFrame
 from customtkinter import CTkLabel
 from customtkinter import CTkFont
 
-from Ui import Colors
+from programtools.personalization import Color
 from Ui.Pages.Settings.InnerFrame import InnerFrame
 from Ui.Pages.Settings.SettingBar import SettingBar
 
@@ -11,7 +11,7 @@ from programtools.personalization import Personalization
 
 class Page(CTkFrame):
     def __init__(self, master, name: str):
-        super().__init__(master, fg_color=Colors.FG_PAGE, bg_color=Colors.BG_PAGE, corner_radius=10)
+        super().__init__(master, fg_color=Color('page_fg'), bg_color=Color('page_bg'), corner_radius=10)
 
         self.name = name
 
