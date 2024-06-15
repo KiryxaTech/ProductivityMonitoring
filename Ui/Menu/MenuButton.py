@@ -4,6 +4,7 @@ import tkinter as tk
 from customtkinter import CTkButton
 from customtkinter import CTkFont
 
+from programtools.personalization import Color
 from Ui import Colors
 from Ui import Position
 from Ui.Pages.Pages import Page
@@ -34,7 +35,7 @@ class MenuButton(CTkButton):
             image=image,
             text='',
             font=font,
-            fg_color=Colors.LEFT_BUTTON,
+            fg_color=Color('menu_button'),
             corner_radius=7,
             anchor='w',
             command=self.show_linked_page
@@ -57,10 +58,10 @@ class MenuButton(CTkButton):
         for page in MenuButton.linked_pages:
             page.grid_forget()
         for button in MenuButton.buttons:
-            button.configure(fg_color=Colors.LEFT_BUTTON)
+            button.configure(fg_color=Color('menu_button'))
 
         self.linked_page.auto_place()
-        self.configure(fg_color=Colors.LEFT_BUTTON_ACTIVE)
+        self.configure(fg_color=Color('menu_button_active'))
 
     def top_place(self):
         self.pack(side=tk.TOP, pady=5, padx=5, anchor=tk.W, fill=tk.Y)

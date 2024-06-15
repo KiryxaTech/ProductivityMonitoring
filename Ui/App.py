@@ -11,7 +11,7 @@ from Ui.Menu.MainButton import MainButton
 from Ui.Menu.MenuButton import MenuButton
 
 from Ui.Pages.Pages import *
-from programtools.personalization import Personalization
+from programtools.personalization import Personalization, Color
 from programtools.settings import Settings
 
 logger = getLogger(__name__)
@@ -26,7 +26,7 @@ APP_MIN_HEIGHT = 350
 
 class App(CTk):
     def __init__(self) -> None: 
-        super().__init__(fg_color=Colors.BG_PAGE)
+        super().__init__(fg_color=Color('page_bg'))
         # Ставит тему приложения.
         Personalization.change_default_theme()
 

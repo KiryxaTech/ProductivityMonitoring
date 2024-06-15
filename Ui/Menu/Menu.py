@@ -1,12 +1,12 @@
 from customtkinter import CTkFrame
 
-from Ui import Colors
+from programtools.personalization import Color
 from Ui.Menu.MenuButton import MenuButton
 
 
 class Menu(CTkFrame):
     def __init__(self, master):
-        super().__init__(master, width=51, corner_radius=0, fg_color=Colors.LEFT_MENU, border_width=0)
+        super().__init__(master, width=51, corner_radius=0, fg_color=Color('menu'), border_width=0)
 
         self.pack_propagate(False)
 

@@ -1,12 +1,12 @@
 from customtkinter import CTkFrame
 
-from Ui import Colors
+from programtools.personalization import Color
 
 
 class InnerFrame(CTkFrame):
     def __init__(self, master):
         super().__init__(master,
-                         fg_color=Colors.LEFT_BUTTON,
+                         fg_color=Color('inner_frame'),
                          corner_radius=7)
 
     def auto_place(self):
