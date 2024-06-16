@@ -1,6 +1,5 @@
 # Авторские права (c) KiryxaTechDev.
 
-import time
 from logging import getLogger, basicConfig, DEBUG
 from threading import Thread
 

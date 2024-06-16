@@ -5,8 +5,7 @@ from customtkinter import CTkFrame
 from customtkinter import CTkButton
 from customtkinter import CTkFont
 
-from programtools.personalization import Colors
-from Ui import Colors
+from programtools.personalization import Color
 from Ui.Menu import Icons
 from Ui.Menu.MenuButton import MenuButton
 
@@ -32,7 +31,7 @@ class MainButton(CTkButton):
             text='',
             font=font,
             image=Icons.MAIN,
-            fg_color=Colors.LEFT_BUTTON,
+            fg_color=Color('menu_button'),
             corner_radius=7,
             anchor='w',
             command=self.toggle_mode
@@ -49,7 +48,7 @@ class MainButton(CTkButton):
             master=self.master,
             width=200,
             height=2,
-            fg_color=Colors.SEPARATE_LINE
+            fg_color=Color('separate_line')
         )
         self.separate_line.pack(side=tk.TOP, pady=1, padx=5)
 

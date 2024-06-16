@@ -5,7 +5,6 @@ from customtkinter import CTkButton
 from customtkinter import CTkFont
 
 from programtools.personalization import Color
-from Ui import Colors
 from Ui import Position
 from Ui.Pages.Pages import Page
 

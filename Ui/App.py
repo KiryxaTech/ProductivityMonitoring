@@ -2,7 +2,6 @@ from logging import getLogger
 
 from customtkinter import CTk
 
-from Ui import Colors
 from Ui import Position
 from Ui.Menu import Icons
 from Ui.Menu import MenuButton

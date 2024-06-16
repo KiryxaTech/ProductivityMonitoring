@@ -8,7 +8,7 @@ import pywinstyles
 import darkdetect
 import customtkinter as ctk
 
-from Ui import App, Colors
+from Ui import App
 from programtools.static_meta import StaticMeta
 from programtools.settings import Settings
 
@@ -58,7 +58,7 @@ class Color:
         return instance._value
 
     @staticmethod
-    def _get_system_theme_id() -> int:
+    def get_system_theme_id() -> int:
         """
         Получает идентификатор текущей темы системы.
 
@@ -114,7 +114,7 @@ class Color:
             return 'transparent'
 
 
-class Personalization:
+class Personalization(metaclass=StaticMeta):
     """
     Класс персонализации.
     """
@@ -187,7 +187,7 @@ class Personalization:
         # Определяем цвет заголовка для 'System'.
         theme = Personalization.parse_theme(theme)
         print(Color('header'))
-        header = Color('header')[Color._get_system_theme_id()]
+        header = Color('header')[Color.get_system_theme_id()]
         
         # Изменяем цвет заголовка.
         logger.debug(f"Change header '{theme}'.")
