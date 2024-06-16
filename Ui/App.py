@@ -28,6 +28,8 @@ class App(CTk):
         super().__init__(fg_color=Color('page_bg'))
         # Ставит тему приложения.
         Personalization.change_default_theme()
+        # Минимальный размер окна для фиксации (pywinstyles уменьшает его до минимальных). 
+        self.minsize(APP_WIDTH, APP_HEIGHT)
 
         # Добавляет весы размещения объектов.
         self.grid_rowconfigure(0, weight=1)
