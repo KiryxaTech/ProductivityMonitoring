@@ -1,5 +1,9 @@
 # Авторские права (c) KiryxaTechDev.
 
 # Константы, помогающие разместить объект.
-TOP = 0
-BOTTOM = 1
+TOP = 'Top'
+BOTTOM = 'Bottom'
+LEFT = 'Left'
+RIGHT = 'Right'
+VERTICAL = 'Vertical'
+HORIZONTAL = 'Horizontal'
