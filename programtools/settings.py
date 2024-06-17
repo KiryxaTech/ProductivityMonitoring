@@ -1,5 +1,7 @@
-from pathlib import Path
+# Авторские права (c) KiryxaTechDev.
+
 from logging import getLogger
+from pathlib import Path
 from typing import Union, Any
 
 from programtools.static_meta import StaticMeta
@@ -14,13 +16,12 @@ class Settings(metaclass=StaticMeta):
     """
     Класс, упрощающий работу с settings.json.
     """
-    default_settings = DEFAULT_SETTINGS = {
-        "icon_path": "data\\icons\\icon.ico",
-        "theme": "system",
-        "language": "english",
-        "region": "USA"
+    default_settings = {
+        "theme": "System",
+        "accent": "green",
+        "icon_path": "data\\icons\\icon.ico"
     }
-    settings_path = Path(r'data\settings.json')
+    settings_directory = Path(r'data\settings.json')
 
     def set_settings(settings: dict) -> None:
         """
@@ -30,17 +31,18 @@ class Settings(metaclass=StaticMeta):
         - settings (dict): Словарь настроек.
         """
         logger.debug('Set settings.')
-        JsonHelper.write(settings, Settings.settings_path)
+        JsonHelper.write(settings, Settings.settings_directory)
 
     def get_settings() -> dict:
         """
         Возращает настройки приложения.
         """
-        settings = JsonHelper.read(Settings.settings_path)
+        settings = JsonHelper.read(Settings.settings_directory)
 
         if settings == {}:
-            logger.debug("Create file %s", Settings.settings_path)
-            JsonHelper.write(Settings.default_settings, Settings.settings_path)
+            logger.debug("Create file %s", Settings.settings_directory)
+            JsonHelper.write(Settings.default_settings, Settings.settings_directory)
+            
             logger.debug('Return default settings')
             return Settings.default_settings
         
@@ -60,13 +62,16 @@ class Settings(metaclass=StaticMeta):
         settings = Settings.get_settings()
 
         if isinstance(key, str):
+            # Если str.
             return settings.get(key)
         elif isinstance(key, dict):
+            # Если dict.
             result = {}
             for k in key:
                 result[k] = settings.get(k)
             return result
         else:
+            # Если передано не то значение.
             raise ValueError("Invalid key type. Expected str or dict.")
     
     def replace_value(key: str, new_value) -> None:

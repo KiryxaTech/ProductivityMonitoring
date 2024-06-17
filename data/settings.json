@@ -1,7 +1,5 @@
 {
-    "icon_path": "data\\icons\\icon.ico",
     "theme": "System",
     "accent": "green",
-    "language": "english",
-    "region": "USA"
+    "icon_path": "data\\icons\\icon.ico"
 }

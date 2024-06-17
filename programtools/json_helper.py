@@ -1,8 +1,9 @@
-import json
+# Авторские права (c) KiryxaTechDev.
 
+import json
+from logging import getLogger
 from pathlib import Path
 from typing import Union, Dict, Any
-from logging import getLogger
 
 from programtools.static_meta import StaticMeta
 
@@ -28,8 +29,10 @@ class JsonHelper(metaclass=StaticMeta):
         try:
             logger.debug(f"Reading '{fp}'.")
             with open(fp, 'r', encoding='utf-8') as f:
+                # Чтение из файла.
                 return json.load(f)
         except FileNotFoundError:
+            # Если файл не найден возвращаем пустой словарь.
             logger.error(f"File {fp} not found. Returning an empty dictionary.")
             return {}
 
@@ -43,4 +46,5 @@ class JsonHelper(metaclass=StaticMeta):
         """
         logger.debug(f"Writing '{fp}'.")
         with open(fp, 'w', encoding='utf-8') as f:
+            # Запись в файл с отступами в 4 пробела.
             json.dump(data, f, indent=4)

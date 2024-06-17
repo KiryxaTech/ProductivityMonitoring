@@ -1,8 +1,13 @@
+# Авторские права (c) KiryxaTechDev.
+
 class StaticMeta(type):
     """
     Метакласс, который делает все методы внутри класса статическими.
     """
-    def __new__(cls, name, bases, dct):
+    def __new__(cls, name, bases, dct) -> 'StaticMeta':
+        """
+        Магический метод, помогающий инициализировать класс со статичными методами.
+        """
         for attr_name, attr_value in dct.items():
             if callable(attr_value):
                 setattr(dct[attr_name], '__get__', lambda x: x)
