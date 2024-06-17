@@ -4,9 +4,8 @@ from logging import getLogger
 
 from customtkinter import CTk
 
-from programtools.personalization import Personalization, Color
+from programtools.personalization import Personalization, Color, Icon
 from programtools.settings import Settings
-from Ui.Menu import Icons
 from Ui.Menu import MenuButton
 from Ui.Menu.Menu import Menu
 from Ui.Menu.MainButton import MainButton
@@ -66,16 +65,16 @@ class App(CTk):
         main_button = MainButton(menu)
         main_button.auto_place()
 
-        home_button = MenuButton(menu, Icons.HOME, home_page)
+        home_button = MenuButton(menu, Icon('home'), home_page)
         home_button.top_place()
         
-        goals_and_objectives_button = MenuButton(menu, Icons.GOALS_AND_OBJECTIVES, goals_and_objectives_page)
+        goals_and_objectives_button = MenuButton(menu, Icon('goals_and_objectives'), goals_and_objectives_page)
         goals_and_objectives_button.top_place()
         
-        statistics_button = MenuButton(menu, Icons.STATISTICS, statistics_page)
+        statistics_button = MenuButton(menu, Icon('statistics'), statistics_page)
         statistics_button.top_place()
         
-        settings_button = MenuButton(menu, Icons.SETTINGS, settings_page)
+        settings_button = MenuButton(menu, Icon('settings'), settings_page)
         settings_button.bottom_place()
 
         # Отображает домашнюю страницу.

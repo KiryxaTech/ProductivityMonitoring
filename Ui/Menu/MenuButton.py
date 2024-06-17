@@ -8,7 +8,7 @@ import customtkinter as ctk
 from customtkinter import CTkButton
 from customtkinter import CTkFont
 
-from programtools.personalization import Color
+from programtools.personalization import Color, Icon
 from Ui.Pages.Pages import Page
 
 
@@ -24,7 +24,7 @@ class MenuButton(CTkButton):
     linked_pages: Page = []
 
     def __init__(self, master: Union[ctk.CTk, tk.Tk, ctk.CTkFrame],
-                 image: ctk.CTkImage, linked_page: Page) -> None:
+                 image: Union[ctk.CTkImage, Icon], linked_page: Page) -> None:
         """
         Инициализирует класс кнопки меню.
 

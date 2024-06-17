@@ -7,6 +7,8 @@ from pathlib import Path
 import customtkinter as ctk
 import darkdetect
 import pywinstyles
+from customtkinter import CTkImage
+from PIL import Image
 
 from programtools.settings import Settings
 from programtools.static_meta import StaticMeta
@@ -115,6 +117,35 @@ class Color:
             # Если произошло непредвиденное исключение.
             logger.error(f'Error retrieving color {name}: {e}')
             return 'transparent'
+
+
+class Icon(CTkImage):
+    """
+    Класс иконки для кнопки.
+    """
+    __icons_directory = Path(r'data\icons')
+
+    def __init__(self, image_name: Literal['main', 'home', 'goals_and_objectives',
+                                           'statistics', 'settings'], size: int = 20) -> None:
+        """
+        Инициализирует класс.
+
+        Параметры:
+        - image_name (Literal['main', 'home', 'goals and objectives',
+                              'statistics', 'settings']): Имя иконки.
+        - size (int): Размер иконки.
+        """
+        # Дирректории для светлой и тёмной темы иконки.
+        light_icon_directory = f"{Icon.__icons_directory}\\menu\\Light\\{image_name}.png"
+        dark_icon_directory = f"{Icon.__icons_directory}\\menu\\Dark\\{image_name}.png"
+
+        # Иконки светлой и тёмной темы.
+        light_icon = Image.open(light_icon_directory)
+        dark_icon = Image.open(dark_icon_directory)
+
+        super().__init__(light_image=light_icon,
+                         dark_image=dark_icon,
+                         size=(size, size))
 
 
 class Personalization(metaclass=StaticMeta):

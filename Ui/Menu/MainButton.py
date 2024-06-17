@@ -9,8 +9,7 @@ from customtkinter import CTkButton
 from customtkinter import CTkFont
 from customtkinter import CTkFrame
 
-from programtools.personalization import Color
-from Ui.Menu import Icons
+from programtools.personalization import Color, Icon
 from Ui.Menu.MenuButton import MenuButton
 
 
@@ -45,7 +44,7 @@ class MainButton(CTkButton):
             height=40,
             text='',
             font=font,
-            image=Icons.MAIN,
+            image=Icon('main'),
             fg_color=Color('menu_button'),
             corner_radius=7,
             anchor='w',
