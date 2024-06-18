@@ -2,13 +2,14 @@
 
 import tkinter as tk
 from logging import getLogger
-from typing import Union
+from typing import Union, List, Optional
 
 import customtkinter as ctk
 from customtkinter import CTkButton
 
 from programtools.personalization import Color, Icon, Font
 from Ui.Pages.Pages import Page
+from Ui import PositionConstants as PosConst
 
 
 # Создание логгера.
@@ -19,11 +20,14 @@ class MenuButton(CTkButton):
     """
     Класс кнопки меню.
     """
-    buttons: CTkButton = []
-    linked_pages: Page = []
+    buttons: List['MenuButton'] = []
 
-    def __init__(self, master: Union[ctk.CTk, tk.Tk, ctk.CTkFrame],
-                 image: Union[ctk.CTkImage, Icon], linked_page: Page) -> None:
+    def __init__(self,
+                 master: Union[ctk.CTk, tk.Tk, ctk.CTkFrame],
+                 image: Union[ctk.CTkImage, Icon],
+                 linked_page: Optional[Page] = None,
+                 vertical_position: Union[PosConst.TOP, PosConst.BOTTOM] = PosConst.TOP,
+                 **kwargs) -> None:
         """
         Инициализирует класс кнопки меню.
 
@@ -33,6 +37,11 @@ class MenuButton(CTkButton):
         - linked_page (Page): Связанная с кнопкой страница.
         """
 
+        self.__btn_callback = kwargs.pop('command', self.__callback)
+        self.__font = Font('MenuButton')
+        self.__fg_color = Color('menu_button')
+        self.__fg_color_active = Color('menu_button_active')
+
         # Инициализация кнопки со всеми настройками.
         super().__init__(
             master,
@@ -40,55 +49,61 @@ class MenuButton(CTkButton):
             height=40,
             image=image,
             text='',
-            font=Font('MenuButton'),
-            fg_color=Color('menu_button'),
+            font=self.__font,
+            fg_color=self.__fg_color,
             corner_radius=7,
             anchor='w',
-            command=self.show_linked_page
+            command=self.__btn_callback
         )
 
         self.linked_page = linked_page
-        self.name = linked_page.get_name()
+        if linked_page is not None:
+            self.name = linked_page.get_name()
+        else:
+            self.name = kwargs.pop('name', None)
+
+        self.__vertical_position = vertical_position
 
         # Добавление кнопки в список кнопок меню.
         MenuButton.buttons.append(self)
-        # Добавление связанной страницы в список этих страниц.
-        MenuButton.linked_pages.append(linked_page)
+
+    def __callback(self):
+        for btn in MenuButton.buttons:
+            btn._change_default_color()
+
+        self._change_active_color()
+
+        self.show_linked_page()
+
+    def _change_default_color(self):
+        self.configure(fg_color=self.__fg_color)
+
+    def _change_active_color(self):
+        self.configure(fg_color=self.__fg_color_active)
 
     def show_linked_page(self) -> None:
-        """
-        Показывает связанную страницу.
-        """
-        logger.debug("Show page '%s'", self.name)
-        # Скрывает все другие страницы.
-        for page in MenuButton.linked_pages:
-            page.grid_forget()
-        # Перекрашивание для обычной кнопки.
-        for button in MenuButton.buttons:
-            button.configure(fg_color=Color('menu_button'))
-
-        # Размещение связанной страницы.
+        if self.linked_page is None:
+            return
+        
+        Page.hide_pages()
         self.linked_page.auto_place()
-        # Перекрашивание для активной кнопки.
-        self.configure(fg_color=Color('menu_button_active'))
 
-    def top_place(self) -> None:
-        """
-        Размещает кнопку наверху меню.
-        """
-        self.pack(side=tk.TOP, pady=5, padx=5, anchor=tk.W, fill=tk.Y)
+    def vertical_position_pack(self):
+        self.pack(side=self.__vertical_position, pady=5,
+                  padx=5, anchor=tk.W, fill=tk.Y)
+        
+    def minimize(self):
+        self.configure(text=None)
 
-    def bottom_place(self) -> None:
-        """
-        Размещает кнопку внизу меню.
-        """
-        self.pack(side=tk.BOTTOM, pady=5, padx=5, anchor=tk.W, fill=tk.Y)
+    def maximize(self):
+        self.configure(text=self.name)
 
-    def get_name(self) -> str:
-        """
-        Возвращает имя кнопки (связанной страницы).
+    @classmethod
+    def minimize_buttons(cls):
+        for btn in cls.buttons:
+            btn.minimize()
 
-        Возвращает:
-        - str: Имя кнопки (связанной страницы).
-        """
-        return self.name
+    @classmethod
+    def maximize_buttons(cls):
+        for btn in cls.buttons:
+            btn.maximize()

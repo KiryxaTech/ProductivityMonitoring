@@ -8,7 +8,6 @@ import customtkinter as ctk
 from customtkinter import CTkFrame
 
 from programtools.personalization import Color
-from Ui.Menu.MenuButton import MenuButton
 
 
 # Создание логгера.
@@ -18,6 +17,8 @@ class Menu(CTkFrame):
     """
     Класс меню приложения
     """
+    is_opened = False
+
     def __init__(self, master: Union[ctk.CTk, tk.Tk, ctk.CTkFrame]) -> None:
         """
         Инициализирует класс.
@@ -27,13 +28,22 @@ class Menu(CTkFrame):
         # Разблокирует изменение размеров меню.
         self.pack_propagate(False)
 
-    def open(self):
+    def __open(self):
         self.configure(width=180)
 
-    def close(self):
+    def __close(self):
         self.configure(width=50)
 
-    def auto_place(self) -> None:
+    def switch(self) -> bool:
+        match Menu.is_opened:
+            case True:
+                Menu.is_opened = False
+                self.__close()
+            case False:
+                Menu.is_opened = True
+                self.__open()
+
+    def top_left_grid(self) -> None:
         """
         Размещает меню слева от основного интерфейса.
         """

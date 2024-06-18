@@ -12,7 +12,7 @@ class SeparateLine(CTkFrame):
     """
     Класс, представляющий собой разделительную линию.
     """
-    def __init__(self, master, length: int, orientation: Literal['Vertical', 'Horizontal'], 
+    def __init__(self, master, length: int, orientation: Literal['vertical', 'horizontal'], 
                  width: int = 2) -> None:
         """
         Инициализирует класс.

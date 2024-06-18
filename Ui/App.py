@@ -6,6 +6,7 @@ from customtkinter import CTk
 
 from programtools.personalization import Personalization, Color, Icon
 from programtools.settings import Settings
+from Ui import PositionConstants as PosConst
 from Ui.Menu import MenuButton
 from Ui.Menu.Menu import Menu
 from Ui.Menu.MainButton import MainButton
@@ -53,32 +54,48 @@ class App(CTk):
 
         # Создание страниц приложения.
         home_page = HomePage(self)
-        goals_and_objectives_page = GoalsAndObjectivesPage(self)
+        goals_objectives_page = GoalsAndObjectivesPage(self)
         statistics_page = StatisticsPage(self)
         settings_page = SettingsPage(self)
 
+        home_page.auto_place()
+
         # Создание меню приложения.
         menu = Menu(self)
-        menu.auto_place()
+        menu.top_left_grid()
 
         # Создание кнопок в меню.
         main_button = MainButton(menu)
-        main_button.auto_place()
+        main_button.vertical_position_pack()
 
-        home_button = MenuButton(menu, Icon('home'), home_page)
-        home_button.top_place()
+        home_btn = MenuButton(
+            menu,
+            Icon('home'),
+            home_page
+        )
+        home_btn.vertical_position_pack()
         
-        goals_and_objectives_button = MenuButton(menu, Icon('goals_and_objectives'), goals_and_objectives_page)
-        goals_and_objectives_button.top_place()
+        goals_objectives_btn = MenuButton(
+            menu,
+            Icon('goals_and_objectives'),
+            goals_objectives_page
+        )
+        goals_objectives_btn.vertical_position_pack()
         
-        statistics_button = MenuButton(menu, Icon('statistics'), statistics_page)
-        statistics_button.top_place()
+        statistics_btn = MenuButton(
+            menu,
+            Icon('statistics'),
+            statistics_page
+        )
+        statistics_btn.vertical_position_pack()
         
-        settings_button = MenuButton(menu, Icon('settings'), settings_page)
-        settings_button.bottom_place()
-
-        # Отображает домашнюю страницу.
-        home_button.show_linked_page()
+        settings_btn = MenuButton(
+            menu,
+            Icon('settings'),
+            settings_page,
+            PosConst.BOTTOM
+        )
+        settings_btn.vertical_position_pack()
 
     def show_window(self) -> None:
         """

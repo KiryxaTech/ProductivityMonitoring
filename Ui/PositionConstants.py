@@ -1,9 +1,3 @@
 # Авторские права (c) KiryxaTechDev.
 
-# Константы, помогающие разместить объект.
-TOP = 'Top'
-BOTTOM = 'Bottom'
-LEFT = 'Left'
-RIGHT = 'Right'
-VERTICAL = 'Vertical'
-HORIZONTAL = 'Horizontal'
+from tkinter import TOP, BOTTOM, RIGHT, LEFT, VERTICAL, HORIZONTAL

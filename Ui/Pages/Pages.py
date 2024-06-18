@@ -1,7 +1,7 @@
 # Авторские права (c) KiryxaTechDev.
 
 import tkinter as tk
-from typing import Union
+from typing import Union, List
 
 import customtkinter as ctk
 from customtkinter import CTkFont
@@ -19,6 +19,8 @@ class Page(CTkFrame):
     """
     Главный класс для создания страниц.
     """
+    pages: List['Page'] = []
+
     def __init__(self, master: Union[ctk.CTk, tk.Tk, ctk.CTkFrame], name: str):
         """
         Инициализирует класс.
@@ -35,6 +37,8 @@ class Page(CTkFrame):
         self.title = CTkLabel(self, width=200, height=25, font=Font('PageTitle'), text=name, anchor='w')
         self.title.grid(column=0, row=0, padx=10, pady=5)
 
+        Page.pages.append(self)
+
     def auto_place(self) -> None:
         """
         Размещает страницу справа от меню.
@@ -43,6 +47,11 @@ class Page(CTkFrame):
 
     def get_name(self) -> str:
         return self.name
+    
+    @classmethod
+    def hide_pages(cls):
+        for page in cls.pages:
+            page.grid_forget()
 
 
 class HomePage(Page):
