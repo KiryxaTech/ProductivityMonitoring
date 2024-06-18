@@ -27,19 +27,11 @@ class Menu(CTkFrame):
         # Разблокирует изменение размеров меню.
         self.pack_propagate(False)
 
-    def add_button_top(self, menu_button: MenuButton) -> None:
-        """
-        Добавляет кнопку меню наверх меню.
-        """
-        logger.debug(f"Added '{menu_button.get_name()}' button on menu top side")
-        menu_button.top_place()
-        
-    def add_button_bottom(self, menu_button: MenuButton) -> None:
-        """
-        Добавляет кноку меню вниз меню.
-        """
-        logger.debug(f"Added '{menu_button.get_name()}' button on menu bonntom side")
-        menu_button.bottom_place()
+    def open(self):
+        self.configure(width=180)
+
+    def close(self):
+        self.configure(width=50)
 
     def auto_place(self) -> None:
         """

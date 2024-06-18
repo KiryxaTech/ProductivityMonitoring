@@ -13,7 +13,7 @@ class SeparateLine(CTkFrame):
     Класс, представляющий собой разделительную линию.
     """
     def __init__(self, master, length: int, orientation: Literal['Vertical', 'Horizontal'], 
-                 widht: int = 2) -> None:
+                 width: int = 2) -> None:
         """
         Инициализирует класс.
 
@@ -24,12 +24,12 @@ class SeparateLine(CTkFrame):
         """
         # Настройки в зависимости от положения.
         if orientation == PositionConstants.VERTICAL:
-            height = 2
+            height = width
             widht = length
         elif orientation == PositionConstants.HORIZONTAL:
             height = length
-            widht = 2
+            widht = width
         else:
             raise ValueError(f"The value cannot be '{orientation}'. Available values: 'Vertical' or 'Horizontal'.")
 
-        super().__init__(master, widht, height, fg_color=Color('separate_line'))
+        super().__init__(master, width, height, fg_color=Color('separate_line'))

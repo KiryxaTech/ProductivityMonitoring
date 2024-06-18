@@ -11,7 +11,7 @@ from customtkinter import CTkFrame
 
 from programtools.personalization import Color, Icon
 from Ui.Menu.MenuButton import MenuButton
-
+from Ui.OtherObjects import SeparateLine
 
 # Создание логгера.
 logger = getLogger(__name__)
@@ -61,14 +61,7 @@ class MainButton(CTkButton):
         # Размещение главной кнопки вверху меню.
         self.pack(side=tk.TOP, pady=5, padx=5, anchor=tk.W, fill=tk.Y)
         
-        # Создание и размещение разделительной линии.
-        self.separate_line = CTkFrame(
-            master=self.master,
-            width=200,
-            height=2,
-            fg_color=Color('separate_line')
-        )
-        self.separate_line.pack(side=tk.TOP, pady=1, padx=5)
+        SeparateLine(self, 200, 'Horizontal')
 
     def toggle_mode(self) -> None:
         """
@@ -83,30 +76,19 @@ class MainButton(CTkButton):
         """
         Открывает меню.
         """
-        # Получение текущей и новой ширины меню.
-        current_width = self.master.winfo_width()
-        new_width = current_width + 2
+        logger.debug('Open menu')
 
-        # Применение новой ширины к меню.
-        self.master.configure(width=new_width)
+        # Устанавливает текст для главной кнопки.
+        self.configure(text=self.name)
+        # Устанавливает текст для всез остальных кнопок меню.
+        for button in MenuButton.buttons:
+            button.configure(text=button.get_name())
+        
+        # Утсанавливает ширину меню в 180 пикселей.
+        self.master.configure(width=180)
 
-        if new_width >= 180:
-            # Устанавливает ширину меню 180.
-            self.master.configure(width=180)
-            
-            # Свойство проверки режима меню в True.
-            MainButton.is_menu_opened = True
-
-            # Устанавливает текст для главной кнопки.
-            self.configure(text=self.name)
-            # Устанавливает текст для всез остальных кнопок меню.
-            for button in MenuButton.buttons:
-                button.configure(text=button.get_name())
-            logger.debug('Open menu')
-            return
-
-        # Вызывает метод через 10 мс.
-        self.after(10, self.open_menu)
+        # Свойство проверки режима меню в True.
+        MainButton.is_menu_opened = True
 
     def close_menu(self) -> None:
         """

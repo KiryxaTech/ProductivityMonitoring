@@ -6,9 +6,8 @@ from typing import Union
 
 import customtkinter as ctk
 from customtkinter import CTkButton
-from customtkinter import CTkFont
 
-from programtools.personalization import Color, Icon
+from programtools.personalization import Color, Icon, Font
 from Ui.Pages.Pages import Page
 
 
@@ -33,12 +32,6 @@ class MenuButton(CTkButton):
         - image (ctk.CTkImage): Изображение для кнопки.
         - linked_page (Page): Связанная с кнопкой страница.
         """
-        # Создание шрифта для кнопки.
-        font = CTkFont(
-            'Segoe UI',
-            size=13,
-            weight='bold'
-        )
 
         # Инициализация кнопки со всеми настройками.
         super().__init__(
@@ -47,7 +40,7 @@ class MenuButton(CTkButton):
             height=40,
             image=image,
             text='',
-            font=font,
+            font=Font('MenuButton'),
             fg_color=Color('menu_button'),
             corner_radius=7,
             anchor='w',
