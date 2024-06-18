@@ -7,11 +7,12 @@ from pathlib import Path
 import customtkinter as ctk
 import darkdetect
 import pywinstyles
-from customtkinter import CTkImage
+from customtkinter import CTkImage, CTkFont
 from PIL import Image
 
 from programtools.settings import Settings
 from programtools.static_meta import StaticMeta
+from programtools.json_helper import JsonHelper
 from Ui import App
 
 
@@ -146,6 +147,23 @@ class Icon(CTkImage):
         super().__init__(light_image=light_icon,
                          dark_image=dark_icon,
                          size=(size, size))
+
+
+class Font(CTkFont):
+    """
+    Класс шрифта.
+    """
+    def __init__(self, name: Literal['MenuButton', 'PageTitle']) -> None:
+        """
+        Инициализирует класс.
+
+        Параметры:
+        - name (Literal['MenuButton', 'PageTitle']): Имя шрифта.
+        """
+        # Парсинг шрифта.
+        family, size, weight = JsonHelper.read(r'data\fonts.json').get(name)
+
+        super().__init__(family, size, weight)
 
 
 class Personalization(metaclass=StaticMeta):

@@ -8,7 +8,7 @@ from customtkinter import CTkFont
 from customtkinter import CTkFrame
 from customtkinter import CTkLabel
 
-from programtools.personalization import Color
+from programtools.personalization import Color, Font
 from Ui.Pages.Settings.InnerFrame import InnerFrame
 from Ui.Pages.Settings.SettingBar import SettingBar
 
@@ -31,11 +31,8 @@ class Page(CTkFrame):
 
         self.name = name
 
-        # Шрифт для заголовка страницы.
-        self.font = CTkFont('Segoe Ui', 20, 'bold')
-
         # Создание и размещение заголовка страницы.
-        self.title = CTkLabel(self, width=200, height=25, font=self.font, text=name, anchor='w')
+        self.title = CTkLabel(self, width=200, height=25, font=Font('PageTitle'), text=name, anchor='w')
         self.title.grid(column=0, row=0, padx=10, pady=5)
 
     def auto_place(self) -> None:

@@ -3,6 +3,7 @@
 from logging import getLogger
 from pathlib import Path
 from typing import Union, Any
+from JsonStructor import JsonFile
 
 from programtools.static_meta import StaticMeta
 from programtools.json_helper import JsonHelper
@@ -22,6 +23,7 @@ class Settings(metaclass=StaticMeta):
         "icon_path": "data\\icons\\icon.ico"
     }
     settings_directory = Path(r'data\settings.json')
+    settings_file = JsonFile(Path(r'data\settings.json'))
 
     def set_settings(settings: dict) -> None:
         """
@@ -31,13 +33,13 @@ class Settings(metaclass=StaticMeta):
         - settings (dict): Словарь настроек.
         """
         logger.debug('Set settings.')
-        JsonHelper.write(settings, Settings.settings_directory)
+        Settings.settings_file.set(settings)
 
     def get_settings() -> dict:
         """
         Возращает настройки приложения.
         """
-        settings = JsonHelper.read(Settings.settings_directory)
+        settings = Settings.settings_file.get()
 
         if settings == {}:
             logger.debug("Create file %s", Settings.settings_directory)
