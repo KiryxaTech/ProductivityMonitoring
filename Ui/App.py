@@ -56,8 +56,6 @@ class App(CTk):
         statistics_page = StatisticsPage(self)
         settings_page = SettingsPage(self)
 
-        home_page.auto_place()
-
         # Создание меню приложения.
         menu = NavigationMenu(self)
         menu.top_left_grid()

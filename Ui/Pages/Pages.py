@@ -8,11 +8,10 @@ from customtkinter import CTkFont
 from customtkinter import CTkFrame
 from customtkinter import CTkLabel
 
-from programtools.personalization import Color, Font
-from Ui.Pages.Settings.InnerFrame import InnerFrame
-from Ui.Pages.Settings.SettingBar import SettingBar
+from programtools import Color, Font
+from .SettingsPage import *
 
-from programtools.personalization import Personalization
+from programtools import Personalization
 
 
 class Page(CTkFrame):
@@ -21,7 +20,7 @@ class Page(CTkFrame):
     """
     pages: List['Page'] = []
 
-    def __init__(self, master: Union[ctk.CTk, tk.Tk, ctk.CTkFrame], name: str):
+    def __init__(self, master: Union[ctk.CTk, tk.Tk, ctk.CTkFrame], name: str, is_main: bool = False):
         """
         Инициализирует класс.
 
@@ -32,6 +31,7 @@ class Page(CTkFrame):
         super().__init__(master, fg_color=Color('page_fg'), bg_color=Color('page_bg'), corner_radius=10)
 
         self.name = name
+        self.is_main = is_main
 
         # Создание и размещение заголовка страницы.
         self.title = CTkLabel(self, width=200, height=25, font=Font('PageTitle'), text=name, anchor='w')
@@ -39,11 +39,19 @@ class Page(CTkFrame):
 
         Page.pages.append(self)
 
-    def auto_place(self) -> None:
+        self._check_main()
+
+    def show(self) -> None:
         """
         Размещает страницу справа от меню.
         """
         self.grid(column=1, row=0, sticky='nsew', padx=(0, 5), pady=(1, 5))
+
+    def hide(self):
+        """
+        Скрывает страницу.
+        """
+        self.grid_forget()
 
     def get_name(self) -> str:
         return self.name
@@ -51,7 +59,11 @@ class Page(CTkFrame):
     @classmethod
     def hide_pages(cls):
         for page in cls.pages:
-            page.grid_forget()
+            page.hide()
+
+    def _check_main(self):
+        if self.is_main:
+            self.show()
 
 
 class HomePage(Page):
@@ -59,7 +71,7 @@ class HomePage(Page):
     Домашняя страница приложения.
     """
     def __init__(self, master):
-        super().__init__(master, name='Home')
+        super().__init__(master, name='Home', is_main=True)
 
 
 class GoalsAndObjectivesPage(Page):

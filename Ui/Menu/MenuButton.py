@@ -83,7 +83,7 @@ class MenuButton(CTkButton):
             return
         
         Page.hide_pages()
-        self.linked_page.auto_place()
+        self.linked_page.show()
 
     def vertical_position_pack(self):
         logger.debug(f"Button {self.name}")
