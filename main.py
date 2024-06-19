@@ -1,6 +1,6 @@
 # Авторские права (c) KiryxaTechDev.
 
-from logging import getLogger, basicConfig, DEBUG, WARNING
+from logging import getLogger, basicConfig, DEBUG
 from threading import Thread
 
 from Ui.App import App
@@ -10,7 +10,7 @@ from Ui.Tray import Tray
 # Создание главного логгера программы.
 logger = getLogger()
 FORMAT = '[%(levelname)s] %(name)s | %(message)s'
-basicConfig(level=WARNING, format=FORMAT)
+basicConfig(level=DEBUG, format=FORMAT)
 
 
 def main() -> None:

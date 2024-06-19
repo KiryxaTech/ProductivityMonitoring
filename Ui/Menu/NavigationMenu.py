@@ -13,6 +13,7 @@ from programtools.personalization import Color
 # Создание логгера.
 logger = getLogger(__name__)
 
+
 class NavigationMenu(CTkFrame):
     """
     Класс NavigationMenu представляет собой меню навигации.
@@ -20,16 +21,20 @@ class NavigationMenu(CTkFrame):
     is_opened = False
 
     def __init__(self, master: Union[ctk.CTk, tk.Tk, ctk.CTkFrame]):
-        super().__init__(master, width=51, corner_radius=0, fg_color=Color('menu'), border_width=0)
+        self.__fg_color = Color('menu')
+
+        super().__init__(master, width=50, corner_radius=0, fg_color=self.__fg_color, border_width=0)
 
         # Разблокирует изменение размеров меню.
         self.pack_propagate(False)
 
     def __open(self):
+        logger.debug('Opening the menu.')
         NavigationMenu.is_opened = True
         self.configure(width=180)
 
     def __close(self):
+        logger.debug('Closing the menu.')
         NavigationMenu.is_opened = False
         self.configure(width=50)
 

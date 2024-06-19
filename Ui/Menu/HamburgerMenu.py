@@ -26,13 +26,14 @@ class HamburgerMenu(MenuButton):
         - master (Union[ctk.CTk, tk.Tk, ctk.CTkFrame]): Объект, на который будет помещен экземпляр.
         """
 
-        self.__name = 'NavigationMenu'
-        self.__menu: 'NavigationMenu.NavigationMenu' = master
+        self.name = 'Menu'
+        self.__menu: 'NavigationMenu' = master
 
         # Инициализация меню-гамбурера.
-        super().__init__(master, Icon('main'), name=self.__name, command=self.__callback)
+        super().__init__(master, Icon('main'), name=self.name, action=self.__callback)
 
     def __callback(self):
+        logger.debug(f"Button '{self.name}' callback.")
         self.__menu.switch()
         if self.__menu.is_opened:
             MenuButton.maximize_buttons()

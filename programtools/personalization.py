@@ -31,20 +31,18 @@ class Color:
     """
     colors_directory = Path(r'data\colors.config')
 
-    def __init__(self, name: Literal['header', 'menu', 'menu_button', 
-                                      'menu_button_active', 'page_bg', 
-                                      'page_fg', 'dropdown_fg', 
-                                      'inner_frame', 'separate_line', 
-                                      'bar']) -> None:
+    def __init__(self, name: Literal['header', 'menu', 'bar', 'menu_button',
+                                     'menu_button_hover', 'menu_button_active',
+                                     'page_bg', 'page_fg', 'dropdown_fg', 'text'
+                                     'inner_frame', 'separate_line']) -> None:
         """
         Инициализирует экземпляр класса Color.
 
         Параметры:
-        - name (Literal['header', 'menu', 'menu_button', 
-                        'menu_button_active', 'page_bg', 
-                        'page_fg', 'dropdown_fg', 
-                        'inner_frame', 'separate_line', 
-                        'bar']): Название цвета из предопределенного списка.
+        - name (Literal['header', 'menu', 'bar', 'menu_button',
+                        'menu_button_hoover' 'menu_button_active',
+                        'page_bg', 'page_fg', 'dropdown_fg', 'text',
+                        'inner_frame', 'separate_line']): Название цвета из предопределенного списка.
         """
         self._name = name
         self._colors = self._load_colors_from_config()
