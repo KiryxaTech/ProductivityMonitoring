@@ -35,12 +35,17 @@ class MenuButton(CTkButton):
         - master (Union[ctk.CTk, tk.Tk, ctk.CTkFrame]): Объект, на который будет помещен экземпляр.
         - image (ctk.CTkImage): Изображение для кнопки.
         - linked_page (Page): Связанная с кнопкой страница.
+        - vertical_position (Union[PosConst.TOP, PosConst.BOTTOM]): Позиция сверху или снизу меню.
         """
+
+        self.linked_page = linked_page
+        self.name = kwargs.pop('name', linked_page.get_name())
 
         self.__btn_callback = kwargs.pop('command', self.__callback)
         self.__font = Font('MenuButton')
         self.__fg_color = Color('menu_button')
         self.__fg_color_active = Color('menu_button_active')
+        self.__vertical_position = vertical_position
 
         # Инициализация кнопки со всеми настройками.
         super().__init__(
@@ -56,31 +61,9 @@ class MenuButton(CTkButton):
             command=self.__btn_callback
         )
 
-        self.linked_page = linked_page
-        if linked_page is not None:
-            self.name = linked_page.get_name()
-        else:
-            self.name = kwargs.pop('name', None)
-
-        self.__vertical_position = vertical_position
-
         # Добавление кнопки в список кнопок меню.
         MenuButton.buttons.append(self)
-
-    def __callback(self):
-        for btn in MenuButton.buttons:
-            btn._change_default_color()
-
-        self._change_active_color()
-
-        self.show_linked_page()
-
-    def _change_default_color(self):
-        self.configure(fg_color=self.__fg_color)
-
-    def _change_active_color(self):
-        self.configure(fg_color=self.__fg_color_active)
-
+    
     def show_linked_page(self) -> None:
         if self.linked_page is None:
             return
@@ -89,6 +72,7 @@ class MenuButton(CTkButton):
         self.linked_page.auto_place()
 
     def vertical_position_pack(self):
+        logger.debug(f"Button {self.name}")
         self.pack(side=self.__vertical_position, pady=5,
                   padx=5, anchor=tk.W, fill=tk.Y)
         
@@ -107,3 +91,16 @@ class MenuButton(CTkButton):
     def maximize_buttons(cls):
         for btn in cls.buttons:
             btn.maximize()
+
+    def _change_default_color(self):
+        self.configure(fg_color=self.__fg_color)
+
+    def _change_active_color(self):
+        self.configure(fg_color=self.__fg_color_active)
+
+    def __callback(self):
+        for btn in MenuButton.buttons:
+            btn._change_default_color()
+
+        self._change_active_color()
+        self.show_linked_page()

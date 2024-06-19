@@ -7,10 +7,7 @@ from customtkinter import CTk
 from programtools.personalization import Personalization, Color, Icon
 from programtools.settings import Settings
 from Ui import PositionConstants as PosConst
-from Ui.Menu import MenuButton
-from Ui.Menu.Menu import Menu
-from Ui.Menu.MainButton import MainButton
-from Ui.Menu.MenuButton import MenuButton
+from Ui.Menu import Menu, MenuButton, MainButton
 from Ui.Pages.Pages import *
 
 
