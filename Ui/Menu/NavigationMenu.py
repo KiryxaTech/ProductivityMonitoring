@@ -7,7 +7,7 @@ from typing import Union
 import customtkinter as ctk
 from customtkinter import CTkFrame
 
-from programtools.personalization import Color
+from programtools import Color
 
 
 # Создание логгера.

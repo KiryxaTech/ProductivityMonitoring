@@ -11,9 +11,9 @@ from customtkinter import CTkImage, CTkFont
 from PIL import Image
 from JsonStructor import JsonFile
 
-from programtools.settings import Settings
-from programtools.static_meta import StaticMeta
-from programtools.json_helper import JsonHelper
+from .settings import Settings
+from .static_meta import StaticMeta
+from .json_helper import JsonHelper
 
 
 # Создание логгера.

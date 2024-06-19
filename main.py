@@ -3,8 +3,7 @@
 from logging import getLogger, basicConfig, DEBUG
 from threading import Thread
 
-from Ui.App import App
-from Ui.Tray import Tray
+from Ui import App, Tray
 
 
 # Создание главного логгера программы.

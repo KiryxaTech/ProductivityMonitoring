@@ -5,7 +5,7 @@ from logging import getLogger
 from pathlib import Path
 from typing import Union, Dict, Any
 
-from programtools.static_meta import StaticMeta
+from .static_meta import StaticMeta
 
 
 # Создание логгера.

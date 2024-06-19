@@ -3,7 +3,7 @@
 import os
 from logging import getLogger
 
-from programtools.static_meta import StaticMeta
+from .static_meta import StaticMeta
 
 
 # Создание логгера.

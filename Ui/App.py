@@ -4,11 +4,10 @@ from logging import getLogger
 
 from customtkinter import CTk
 
-from programtools.personalization import Personalization, Color, Icon
-from programtools.settings import Settings
+from programtools import (Personalization, Color, Icon, Settings)
 from Ui import PositionConstants as PosConst
-from Ui.Menu import NavigationMenu, MenuButton, HamburgerMenu
-from Ui.Pages.Pages import *
+from Ui.Menu import *
+from Ui.Pages import *
 
 
 # Создание логгера.
@@ -19,8 +18,8 @@ APP_NAME = 'ProductivityMonitoring'
 APP_VERSION = '1.0'
 APP_WIDTH = 1100
 APP_HEIGHT = 500
-APP_MIN_WIDTH = 600
-APP_MIN_HEIGHT = 350
+APP_MIN_WIDTH = 700
+APP_MIN_HEIGHT = 400
 
 
 class App(CTk):

@@ -4,7 +4,7 @@ from typing import Literal
 
 from customtkinter import CTkFrame
 
-from programtools.personalization import Color
+from programtools import Color
 from Ui import PositionConstants
 
 

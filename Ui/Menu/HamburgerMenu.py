@@ -6,9 +6,9 @@ from typing import Union
 
 import customtkinter as ctk
 
-from programtools.personalization import Icon
+from . import *
+from programtools import Icon
 from Ui.OtherObjects import SeparateLine
-from . import MenuButton, NavigationMenu
 
 # Создание логгера.
 logger = getLogger(__name__)

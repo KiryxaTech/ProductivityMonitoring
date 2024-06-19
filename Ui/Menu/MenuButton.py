@@ -7,9 +7,9 @@ from typing import Union, Optional, Set
 import customtkinter as ctk
 from customtkinter import CTkButton
 
-from programtools.personalization import Color, Icon, Font
+from programtools import Color, Icon, Font
 from Ui import PositionConstants as PosConst
-from Ui.Pages.Pages import Page
+from Ui.Pages import Page
 
 
 # Создание логгера.

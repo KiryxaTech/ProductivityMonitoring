@@ -5,7 +5,7 @@ from pathlib import Path
 from PIL import Image
 from pystray import Icon, Menu, MenuItem as Item
 
-from programtools.program import Program
+from programtools import Program
 
 
 # Константа икноки для трея.

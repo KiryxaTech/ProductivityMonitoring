@@ -5,8 +5,8 @@ from pathlib import Path
 from typing import Union, Any
 from JsonStructor import JsonFile
 
-from programtools.static_meta import StaticMeta
-from programtools.json_helper import JsonHelper
+from .static_meta import StaticMeta
+from .json_helper import JsonHelper
 
 
 # Создание логгера.
