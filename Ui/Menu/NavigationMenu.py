@@ -13,38 +13,31 @@ from programtools.personalization import Color
 # Создание логгера.
 logger = getLogger(__name__)
 
-class Menu(CTkFrame):
+class NavigationMenu(CTkFrame):
     """
-    Класс меню приложения
+    Класс NavigationMenu представляет собой меню навигации.
     """
     is_opened = False
 
-    def __init__(self, master: Union[ctk.CTk, tk.Tk, ctk.CTkFrame]) -> None:
-        """
-        Инициализирует класс.
-        """
+    def __init__(self, master: Union[ctk.CTk, tk.Tk, ctk.CTkFrame]):
         super().__init__(master, width=51, corner_radius=0, fg_color=Color('menu'), border_width=0)
 
         # Разблокирует изменение размеров меню.
         self.pack_propagate(False)
 
     def __open(self):
+        NavigationMenu.is_opened = True
         self.configure(width=180)
 
     def __close(self):
+        NavigationMenu.is_opened = False
         self.configure(width=50)
 
     def switch(self) -> bool:
-        match Menu.is_opened:
-            case True:
-                Menu.is_opened = False
-                self.__close()
-            case False:
-                Menu.is_opened = True
-                self.__open()
+        if NavigationMenu.is_opened:
+            self.__close()
+        else:
+            self.__open()
 
     def top_left_grid(self) -> None:
-        """
-        Размещает меню слева от основного интерфейса.
-        """
         self.grid(column=0, row=0, sticky='nsew')

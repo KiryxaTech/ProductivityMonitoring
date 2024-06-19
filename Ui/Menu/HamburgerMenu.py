@@ -6,20 +6,19 @@ from typing import Union
 
 import customtkinter as ctk
 
-from programtools.personalization import Color, Icon, Font
-from Ui.Menu import Menu
-from Ui.Menu.MenuButton import MenuButton
+from programtools.personalization import Icon
 from Ui.OtherObjects import SeparateLine
+from . import MenuButton, NavigationMenu
 
 # Создание логгера.
 logger = getLogger(__name__)
 
 
-class MainButton(MenuButton):
+class HamburgerMenu(MenuButton):
     """
-    Класс главной кнопки в меню приложения.
+    Класс HamburgerButton представляет собой меню-гамбургер для открытия/закрытия меню навигации.
     """
-    def __init__(self, master: Union[ctk.CTk, tk.Tk, ctk.CTkFrame]) -> None:
+    def __init__(self, master: Union[ctk.CTk, tk.Tk, ctk.CTkFrame]):
         """
         Инициализация класса.
 
@@ -27,13 +26,11 @@ class MainButton(MenuButton):
         - master (Union[ctk.CTk, tk.Tk, ctk.CTkFrame]): Объект, на который будет помещен экземпляр.
         """
 
-        self.__name = 'Menu'
-        self.__menu: 'Menu.Menu' = master
+        self.__name = 'NavigationMenu'
+        self.__menu: 'NavigationMenu.NavigationMenu' = master
 
-        # Инициализация кнопки со всеми настройками.
+        # Инициализация меню-гамбурера.
         super().__init__(master, Icon('main'), name=self.__name, command=self.__callback)
-
-        MenuButton.buttons.append(self)
 
     def __callback(self):
         self.__menu.switch()

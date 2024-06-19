@@ -7,7 +7,7 @@ from customtkinter import CTk
 from programtools.personalization import Personalization, Color, Icon
 from programtools.settings import Settings
 from Ui import PositionConstants as PosConst
-from Ui.Menu import Menu, MenuButton, MainButton
+from Ui.Menu import NavigationMenu, MenuButton, HamburgerMenu
 from Ui.Pages.Pages import *
 
 
@@ -32,6 +32,8 @@ class App(CTk):
         Инизиализирует класс.
         """
         super().__init__(fg_color=Color('page_bg'))
+
+        Personalization.app_instance = self
         
         # Ставит тему приложения.
         Personalization.change_default_theme()
@@ -58,11 +60,11 @@ class App(CTk):
         home_page.auto_place()
 
         # Создание меню приложения.
-        menu = Menu(self)
+        menu = NavigationMenu(self)
         menu.top_left_grid()
 
         # Создание кнопок в меню.
-        main_button = MainButton(menu)
+        main_button = HamburgerMenu(menu)
         main_button.vertical_position_pack()
 
         home_btn = MenuButton(

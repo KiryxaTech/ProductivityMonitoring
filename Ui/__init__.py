@@ -1,5 +1,5 @@
 # Авторские права (c) KiryxaTechDev.
 
-from .Menu.Menu import Menu
+from .Menu.NavigationMenu import NavigationMenu
 from .Menu.MenuButton import MenuButton
-from .Menu.MainButton import MainButton
+from .Menu.HamburgerMenu import HamburgerMenu

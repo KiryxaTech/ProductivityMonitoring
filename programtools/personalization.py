@@ -13,7 +13,6 @@ from PIL import Image
 from programtools.settings import Settings
 from programtools.static_meta import StaticMeta
 from programtools.json_helper import JsonHelper
-from Ui import App
 
 
 # Создание логгера.
@@ -170,6 +169,8 @@ class Personalization(metaclass=StaticMeta):
     """
     Класс персонализации.
     """
+    app_instance = None
+
     def set_theme(theme: Literal['System', 'Light', 'Dark']) -> None:
         """
         Применяет тему приложения.
@@ -227,7 +228,7 @@ class Personalization(metaclass=StaticMeta):
         
         # Изменяем цвет заголовка.
         logger.debug(f"Change header '{header_color}'.")
-        pywinstyles.change_header_color(App, header_color)
+        pywinstyles.change_header_color(Personalization.app_instance, header_color)
 
     def change_theme(theme: Literal['System', 'Light', 'Dark']) -> None:
         """

@@ -2,7 +2,7 @@
 
 import tkinter as tk
 from logging import getLogger
-from typing import Union, List, Optional
+from typing import Union, List, Optional, Set
 
 import customtkinter as ctk
 from customtkinter import CTkButton
@@ -18,9 +18,9 @@ logger = getLogger(__name__)
 
 class MenuButton(CTkButton):
     """
-    Класс кнопки меню.
+    Класс MenuButton представляет собой кнопку в меню навигации.
     """
-    buttons: List['MenuButton'] = []
+    buttons: Set['MenuButton'] = []
 
     def __init__(self,
                  master: Union[ctk.CTk, tk.Tk, ctk.CTkFrame],
@@ -38,8 +38,10 @@ class MenuButton(CTkButton):
         - vertical_position (Union[PosConst.TOP, PosConst.BOTTOM]): Позиция сверху или снизу меню.
         """
 
+        self.kwargs = kwargs
+
         self.linked_page = linked_page
-        self.name = kwargs.pop('name', linked_page.get_name())
+        self.name = str(self)
 
         self.__btn_callback = kwargs.pop('command', self.__callback)
         self.__font = Font('MenuButton')
@@ -63,6 +65,11 @@ class MenuButton(CTkButton):
 
         # Добавление кнопки в список кнопок меню.
         MenuButton.buttons.append(self)
+
+    def __str__(self):
+        if self.linked_page is not None:
+            return self.linked_page.get_name()
+        return self.kwargs.pop('name', None)
     
     def show_linked_page(self) -> None:
         if self.linked_page is None:
