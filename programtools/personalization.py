@@ -9,6 +9,7 @@ import darkdetect
 import pywinstyles
 from customtkinter import CTkImage, CTkFont
 from PIL import Image
+from JsonStructor import JsonFile
 
 from programtools.settings import Settings
 from programtools.static_meta import StaticMeta
@@ -29,7 +30,8 @@ class Color:
     """
     Класс цвета, который использует значения из конфигурационного файла.
     """
-    colors_directory = Path(r'data\colors.config')
+    colors_directory = Path(r'data\colors.json')
+    colors_file = JsonFile(colors_directory)
 
     def __init__(self, name: Literal['header', 'menu', 'bar', 'menu_button',
                                      'menu_button_hover', 'menu_button_active',
@@ -45,7 +47,7 @@ class Color:
                         'inner_frame', 'separate_line']): Название цвета из предопределенного списка.
         """
         self._name = name
-        self._colors = self._load_colors_from_config()
+        self._colors = Color.colors_file.get()
         self._value = self._get_color(name)
 
     def __new__(cls, name) -> Union[List[str], str]:
@@ -60,35 +62,11 @@ class Color:
         """
         # Создание нового экземпляра класса.
         instance = super().__new__(cls)
-        
-        # Присваивание значений до инициализации класса.
-        instance._colors = instance._load_colors_from_config()
+
+        instance._colors = Color.colors_file.get()
         instance._value = instance._get_color(name)
-        
+
         return instance._value
-
-    def _load_colors_from_config(self) -> dict:
-        """
-        Загружает цвета из конфигурационного файла.
-
-        Возвращает:
-        - dict: Словарь с загруженными цветами.
-        """
-        colors = {}
-        try:
-            with open(Color.colors_directory, 'r') as file:
-                # Чтение каждой строки.
-                for line in file:
-                    # Разделение на имя и значение.
-                    name, value = line.strip().split(': ')
-                    # Превращение части с цветами в список цветов для тем.
-                    colors[name] = value.split(', ')
-                    logger.debug(f'Loaded color {name}: {colors[name]}')
-        except Exception as e:
-            # Если не был загружен цвет.
-            logger.error(f'Error loading colors from config: {e}')
-
-        return colors
 
     def _get_color(self, name) -> Union[List[str], str]:
         """
@@ -97,24 +75,7 @@ class Color:
         Возвращает:
         - Union[List[str], str] Список значений цвета для разных тем или строку 'transparent'.
         """
-        try:
-            color_values = self._colors.get(name)
-
-            if color_values is None:
-                # Если цвет не найден возвращаем 'transparent'.
-                logger.error(f'Color {name} not found in config.')
-                return 'transparent'
-            
-            # Возвращаем строку 'transparent', если цветом является ['transparent'].
-            if color_values == ['transparent']:
-                return 'transparent'
-            # Возвращаем список значений, если цвет имеет значения для разных тем.
-            return color_values
-        
-        except Exception as e:
-            # Если произошло непредвиденное исключение.
-            logger.error(f'Error retrieving color {name}: {e}')
-            return 'transparent'
+        return self._colors.get(name)
 
 
 class Icon(CTkImage):
