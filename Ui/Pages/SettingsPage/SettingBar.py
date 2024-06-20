@@ -56,4 +56,4 @@ class SettingBar(CTkFrame):
         """
         Размещает панель сверху.
         """
-        self.pack(side=tk.TOP, fill=tk.X, padx=5, pady=5)
+        self.pack(side=tk.TOP, fill=tk.X, padx=10, pady=(0, 10))

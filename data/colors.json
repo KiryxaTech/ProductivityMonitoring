@@ -10,5 +10,5 @@
     "page_fg": ["#f7f7f7", "#221f1f"],
     "dropdown_fg": ["#62d1d2", "#2a3441"],
     "inner_frame": "transparent",
-    "bar": ["#fbfbfb", "#2b2b2b"]
+    "bar": ["#dbdbdb", "#2b2b2b"]
 }

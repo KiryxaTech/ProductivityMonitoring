@@ -42,6 +42,7 @@ class App(CTk):
         # Добавляет весы размещения объектов.
         self.grid_rowconfigure(0, weight=1)
         self.grid_columnconfigure(1, weight=1)
+        self.grid_columnconfigure(2, weight=0)
 
         # Настройки окна.
         self.title(APP_NAME) # Название

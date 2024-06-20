@@ -1,24 +1,24 @@
 # Авторские права (c) KiryxaTechDev.
 
 import tkinter as tk
-from typing import Union, List
+from typing import Union, Set
 
 import customtkinter as ctk
-from customtkinter import CTkFont
 from customtkinter import CTkFrame
-from customtkinter import CTkLabel
 
-from programtools import Color, Font
-from .SettingsPage import *
-
+from programtools import Color
 from programtools import Personalization
+from .PageTitle import PageTitle
+from .SettingsPage import SettingBar
+from .InnerFrame import InnerFrame
+from Ui import PositionConstants as PosConst
 
 
 class Page(CTkFrame):
     """
     Главный класс для создания страниц.
     """
-    pages: List['Page'] = []
+    pages: Set['Page'] = []
 
     def __init__(self, master: Union[ctk.CTk, tk.Tk, ctk.CTkFrame], name: str, is_main: bool = False):
         """
@@ -28,14 +28,16 @@ class Page(CTkFrame):
         - master (Union[ctk.CTk, tk.Tk, ctk.CTkFrame]): Объект, на который будет помещен экземпляр.
         - name (str): Название страницы.
         """
-        super().__init__(master, fg_color=Color('page_fg'), bg_color=Color('page_bg'), corner_radius=10)
+        super().__init__(master, fg_color=Color('page_fg'), bg_color=Color('page_bg'), corner_radius=7)
 
         self.name = name
         self.is_main = is_main
 
-        # Создание и размещение заголовка страницы.
-        self.title = CTkLabel(self, width=200, height=25, font=Font('PageTitle'), text=name, anchor='w')
-        self.title.grid(column=0, row=0, padx=10, pady=5)
+        self.title = PageTitle(self, name)
+        self.title.pack(side=PosConst.TOP, padx=(10, 0), anchor=tk.W)
+        
+        self.inner_frame = InnerFrame(self)  # Создание экземпляра InnerFrame
+        self.inner_frame.pack(side=PosConst.TOP, padx=0, pady=(0, 7), expand=True, fill=tk.BOTH)
 
         Page.pages.append(self)
 
@@ -97,14 +99,6 @@ class SettingsPage(Page):
     def __init__(self, master):
         super().__init__(master, name='Settings')
 
-        # Создание весов для корректного размещения объектов.
-        self.grid_rowconfigure(1, weight=1)
-        self.grid_columnconfigure(1, weight=1)
-
-        # Создание и размещение внутренней рамки.
-        inner_frame = InnerFrame(self)
-        inner_frame.auto_place()
-
         # Создание и размещение панели настройки темы.
-        theme_frame = SettingBar(inner_frame, 'Theme', ('System', 'Light', 'Dark'), command=Personalization.change_theme)
+        theme_frame = SettingBar(self.inner_frame, 'Theme', ('System', 'Light', 'Dark'), command=Personalization.change_theme)
         theme_frame.auto_place()
