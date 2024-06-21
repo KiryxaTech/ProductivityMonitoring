@@ -5,9 +5,9 @@ from logging import getLogger
 from customtkinter import CTk
 
 from programtools import (Personalization, Color, Icon, Settings)
-from Ui import PositionConstants as PosConst
-from Ui.Menu import *
-from Ui.Pages import *
+from ui import position_constants
+from ui.menu import *
+from ui.pages import *
 
 
 # Создание логгера.
@@ -90,7 +90,7 @@ class App(CTk):
             menu,
             Icon('settings'),
             settings_page,
-            PosConst.BOTTOM
+            position_constants.BOTTOM
         )
         settings_btn.vertical_position_pack()
 

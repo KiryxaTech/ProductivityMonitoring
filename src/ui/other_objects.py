@@ -5,7 +5,7 @@ from typing import Literal
 from customtkinter import CTkFrame
 
 from programtools import Color
-from Ui import PositionConstants
+from ui import position_constants
 
 
 class SeparateLine(CTkFrame):
@@ -23,10 +23,10 @@ class SeparateLine(CTkFrame):
         - width (int): Ширина линии.
         """
         # Настройки в зависимости от положения.
-        if orientation == PositionConstants.VERTICAL:
+        if orientation == position_constants.VERTICAL:
             height = width
             widht = length
-        elif orientation == PositionConstants.HORIZONTAL:
+        elif orientation == position_constants.HORIZONTAL:
             height = length
             widht = width
         else:

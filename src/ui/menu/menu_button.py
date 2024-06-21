@@ -8,8 +8,8 @@ import customtkinter as ctk
 from customtkinter import CTkButton
 
 from programtools import Color, Icon, Font
-from Ui import PositionConstants as PosConst
-from Ui.Pages import Page
+from ui import position_constants as PosConst
+from ui.pages import Page
 
 
 # Создание логгера.

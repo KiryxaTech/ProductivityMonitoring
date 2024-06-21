@@ -8,7 +8,7 @@ import customtkinter as ctk
 
 from . import *
 from programtools import Icon
-from Ui.OtherObjects import SeparateLine
+from ui.other_objects import SeparateLine
 
 # Создание логгера.
 logger = getLogger(__name__)

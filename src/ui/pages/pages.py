@@ -8,10 +8,10 @@ from customtkinter import CTkFrame
 
 from programtools import Color
 from programtools import Personalization
-from .PageTitle import PageTitle
-from .SettingsPage import SettingBar
-from .InnerFrame import InnerFrame
-from Ui import PositionConstants as PosConst
+from .page_title import PageTitle
+from .settings_page import SettingBar
+from .inner_frame import InnerFrame
+from ui import position_constants as PosConst
 
 
 class Page(CTkFrame):
