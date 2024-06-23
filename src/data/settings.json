@@ -1,5 +1,6 @@
 {
     "theme": "System",
     "accent": "nebula",
+    "scaling": "100%",
     "icon_path": "data\\icons\\icon.ico"
 }

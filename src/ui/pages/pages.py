@@ -100,10 +100,23 @@ class SettingsPage(Page):
 
 
         # Создание и размещение панели настройки темы.
-        theme_bar = SettingBar(self.inner_frame, 'Theme', 'Color for app.')
-        theme_option_widget = OptionWidget(master=theme_bar,
-                                           values=('System', 'Light', 'Dark'),
-                                           variable_value=Personalization.get_theme(),
-                                           command=Personalization.change_theme)
-        theme_bar.add_widget(theme_option_widget)
-        theme_bar.auto_place()
+        theme_mode_bar = SettingBar(self.inner_frame, 'Theme mode', 'Color for application.')
+        theme_mode_widget = OptionWidget(master=theme_mode_bar,
+                                         values=('System', 'Light', 'Dark'),
+                                         variable_value=Personalization.get_theme(),
+                                         command=Personalization.set_theme)
+        theme_mode_bar.add_widget(theme_mode_widget)
+
+        accent_color_bar = SettingBar(self.inner_frame, 'Accent color', 'Accent color for application elements.')
+        accent_color_widget = OptionWidget(master=accent_color_bar,
+                                           values=('nebula', 'dark-blue', 'green'),
+                                           variable_value=Personalization.get_accent(),
+                                           command=Personalization.set_accent)
+        accent_color_bar.add_widget(accent_color_widget)
+
+        interface_scaling_bar = SettingBar(self.inner_frame, 'Interface scaling', 'Scaling widgets and text.')
+        interface_scaling_widget = OptionWidget(master=interface_scaling_bar,
+                                                values=('100%', '125%', '150%'),
+                                                variable_value=Personalization.get_scaling(),
+                                                command=Personalization.set_scaling)
+        interface_scaling_bar.add_widget(interface_scaling_widget)

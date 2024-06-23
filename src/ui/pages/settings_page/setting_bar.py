@@ -68,12 +68,8 @@ class SettingBar(CTkFrame):
                                    anchor='s',
                                    font=Font('SettingBarDescription'))
         bar_description.place(x=5, y=30)
+
+        self.pack(side=tk.TOP, padx=10, pady=(0, 10), anchor=tk.W, fill=tk.X)
     
     def add_widget(self, widget: Union[OptionWidget]):
         widget.pack(side=tk.RIGHT, padx=5)
-
-    def auto_place(self) -> None:
-        """
-        Размещает панель сверху.
-        """
-        self.pack(side=tk.TOP, padx=10, pady=(0, 10), anchor=tk.W, fill=tk.X)

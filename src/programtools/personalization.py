@@ -176,6 +176,18 @@ class Personalization(metaclass=StaticMeta):
         logger.debug(f"Change theme '{accent}'.")
         ctk.set_default_color_theme(accent)
 
+    def get_accent() -> Literal['green', 'dark-blue', 'nebula']:
+        return Settings.get_value('accent')
+
+    def set_scaling(scaling: Literal['100%', '125%', '150%']):
+        Settings.replace_value('scaling', scaling)
+
+        scaling_factor = int(scaling.replace('%', '')) / 100
+        ctk.set_widget_scaling(scaling_factor)
+
+    def get_scaling():
+        return Settings.get_value('scaling')
+
     def set_header(theme: Literal['System', 'Dark', 'Light']) -> None:
         """
         Применяет цвет заголовка окна в зависимости от темы.
@@ -219,7 +231,10 @@ class Personalization(metaclass=StaticMeta):
         Применяет тему по умолчанию.
         """
         logger.debug('Changing default theme.')
-        Personalization.change_theme(Personalization.get_theme())
+        Personalization.set_theme(Personalization.get_theme())
+        Personalization.set_accent(Personalization.get_accent())
+        Personalization.set_header(Personalization.get_theme())
+        Personalization.set_scaling(Personalization.get_scaling())
 
     def parse_theme(theme: Literal['System', 'Light', 'Dark']) -> Literal['Light', 'Dark']:
         """
