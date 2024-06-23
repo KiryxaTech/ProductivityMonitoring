@@ -111,12 +111,12 @@ class Font(CTkFont):
     """
     Класс шрифта.
     """
-    def __init__(self, name: Literal['MenuButton', 'PageTitle']) -> None:
+    def __init__(self, name: Literal['MenuButton', 'PageTitle', 'SettingBatTitle', 'SettingBarDescription']) -> None:
         """
         Инициализирует класс.
 
         Параметры:
-        - name (Literal['MenuButton', 'PageTitle']): Имя шрифта.
+        - name (Literal['MenuButton', 'PageTitle', 'SettingBarTitle', 'SettingBarDescription']): Имя шрифта.
         """
         # Парсинг шрифта.
         family, size, weight = JsonHelper.read(r'data\fonts.json').get(name)

@@ -1,3 +1,3 @@
 # Авторские права (c) KiryxaTechDev.
 
-from .setting_bar import SettingBar
+from .setting_bar import SettingBar, OptionWidget

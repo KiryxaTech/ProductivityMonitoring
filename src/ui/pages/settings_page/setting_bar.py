@@ -1,23 +1,37 @@
 # Авторские права (c) KiryxaTechDev.
 
 import tkinter as tk
-from typing import Union
+from typing import Union, List, Tuple, Any
 
 import customtkinter as ctk
 from customtkinter import CTkFont
 from customtkinter import CTkFrame, CTkLabel, CTkOptionMenu
 
-from programtools.settings import Settings
-from programtools.personalization import Color
+from programtools import Settings, Color, Font
+
+class OptionWidget(CTkOptionMenu):
+    def __init__(self,
+                 master: Union[CTkFrame, tk.Tk, ctk.CTk],
+                 values: Union[List, Tuple],
+                 variable_value: Any,
+                 command: Any):
+
+        self._var = tk.Variable(value=variable_value)
+
+        super().__init__(master=master,
+                         values=values,
+                         variable=self._var,
+                         command=command)
 
 
 class SettingBar(CTkFrame):
     """
     Класс панели с настройкой.
     """
-    def __init__(self, master: Union[CTkFrame, tk.Tk, ctk.CTk],
-                 title: str, option_menu_values: Union[list, tuple] = None,
-                 command = None) -> None:
+    def __init__(self,
+                 master: Union[CTkFrame, tk.Tk, ctk.CTk],
+                 title: str,
+                 description: str):
         """
         Инициализирует класс.
 
@@ -27,31 +41,36 @@ class SettingBar(CTkFrame):
         - option_menu_values ()
         """
         super().__init__(master=master,
-                         height=40,
+                         height=100,
                          fg_color=Color('bar'),
-                         corner_radius=7)
+                         corner_radius=7,
+                         border_color='#aaaaaa',
+                         border_width=2)
 
-        # Шрифт для названия настройки.
-        self.font = CTkFont('Roboto', size=20)
+        title_frame = CTkFrame(self,
+                               height=50,
+                               fg_color='transparent',
+                               border_width=0)
+        title_frame.pack(side=tk.LEFT, padx=5, pady=2)
 
-        # Создание и размещение текстового поля названия нацстройки.
-        self.title_label = CTkLabel(self,
-                                    height=40,
-                                    text=title,
-                                    anchor='w',
-                                    font=self.font)
-        self.title_label.pack(side=tk.LEFT, padx=5)
+        # Создание и размещение текстового поля названия настройки.
+        bar_title = CTkLabel(title_frame,
+                            height=20,
+                            text=title,
+                            anchor='s',
+                            font=Font('SettingBarTitle'))
+        bar_title.place(x=5, y=5)
 
-        # Создание переменной для опционального меню.
-        option_menu_var = tk.Variable(value=Settings.get_value('theme'))
-        # Создание и размещение опционального меню.
-        self.option_menu = CTkOptionMenu(
-            master=self,
-            values=option_menu_values,
-            command=command,
-            variable=option_menu_var
-        )
-        self.option_menu.pack(side=tk.RIGHT, padx=5)
+        bar_description = CTkLabel(title_frame,
+                                   height=15,
+                                   text=description,
+                                   text_color='#999999',
+                                   anchor='s',
+                                   font=Font('SettingBarDescription'))
+        bar_description.place(x=5, y=30)
+    
+    def add_widget(self, widget: Union[OptionWidget]):
+        widget.pack(side=tk.RIGHT, padx=5)
 
     def auto_place(self) -> None:
         """

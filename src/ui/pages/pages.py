@@ -6,10 +6,9 @@ from typing import Union, Set
 import customtkinter as ctk
 from customtkinter import CTkFrame
 
-from programtools import Color
-from programtools import Personalization
+from programtools import Color, Personalization
 from .page_title import PageTitle
-from .settings_page import SettingBar
+from .settings_page import *
 from .inner_frame import InnerFrame
 from ui import position_constants as PosConst
 
@@ -99,6 +98,12 @@ class SettingsPage(Page):
     def __init__(self, master):
         super().__init__(master, name='Settings')
 
+
         # Создание и размещение панели настройки темы.
-        theme_frame = SettingBar(self.inner_frame, 'Theme', ('System', 'Light', 'Dark'), command=Personalization.change_theme)
-        theme_frame.auto_place()
+        theme_bar = SettingBar(self.inner_frame, 'Theme', 'Color for app.')
+        theme_option_widget = OptionWidget(master=theme_bar,
+                                           values=('System', 'Light', 'Dark'),
+                                           variable_value=Personalization.get_theme(),
+                                           command=Personalization.change_theme)
+        theme_bar.add_widget(theme_option_widget)
+        theme_bar.auto_place()

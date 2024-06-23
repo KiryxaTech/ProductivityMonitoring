@@ -20,7 +20,7 @@ def main() -> None:
 
     tray = Tray()
     tray_thr = Thread(target=tray.run)
-    tray_thr.start()
+    # tray_thr.start()
 
     app = App()
     app.show_window()

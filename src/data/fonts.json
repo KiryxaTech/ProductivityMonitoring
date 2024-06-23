@@ -1,4 +1,6 @@
 {
-    "MenuButton": ["Segoe UI", 15, "bold"],
-    "PageTitle": ["Segoe UI", 20, "bold"]
+    "MenuButton": ["Roboto", 15, "bold"],
+    "PageTitle": ["Roboto", 20, "bold"],
+    "SettingBarTitle": ["Roboto", 18, "bold"],
+    "SettingBarDescription": ["Roboto", 12, null]
 }
