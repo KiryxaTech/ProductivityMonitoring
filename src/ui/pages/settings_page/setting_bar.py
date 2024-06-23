@@ -27,17 +27,18 @@ class SettingBar(CTkFrame):
         - option_menu_values ()
         """
         super().__init__(master=master,
+                         height=40,
                          fg_color=Color('bar'),
                          corner_radius=7)
 
         # Шрифт для названия настройки.
-        self.font = CTkFont('Segoe UI', size=20)
+        self.font = CTkFont('Roboto', size=20)
 
         # Создание и размещение текстового поля названия нацстройки.
         self.title_label = CTkLabel(self,
-                                    height=80,
+                                    height=40,
                                     text=title,
-                                    anchor='e',
+                                    anchor='w',
                                     font=self.font)
         self.title_label.pack(side=tk.LEFT, padx=5)
 
@@ -56,4 +57,4 @@ class SettingBar(CTkFrame):
         """
         Размещает панель сверху.
         """
-        self.pack(side=tk.TOP, fill=tk.X, padx=10, pady=(0, 10))
+        self.pack(side=tk.TOP, padx=10, pady=(0, 10), anchor=tk.W, fill=tk.X)

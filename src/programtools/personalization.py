@@ -85,7 +85,7 @@ class Icon(CTkImage):
     __icons_directory = Path(r'data\icons')
 
     def __init__(self, image_name: Literal['main', 'home', 'goals_and_objectives',
-                                           'statistics', 'settings'], size: int = 20) -> None:
+                                           'statistics', 'settings'], size: int = 25) -> None:
         """
         Инициализирует класс.
 
