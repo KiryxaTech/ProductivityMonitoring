@@ -159,7 +159,7 @@ class Personalization(metaclass=StaticMeta):
         """
         return Settings.get_value('theme')
 
-    def set_accent(accent: Literal['green', 'dark-blue']) -> None:
+    def set_accent(accent: Literal['green', 'dark-blue', 'nebula']) -> None:
         """
         Применяет тему приложения.
 
@@ -169,6 +169,8 @@ class Personalization(metaclass=StaticMeta):
         logger.debug(f"Get accent color '{accent}'")
         # Записываем новый акцентный цвет в настройки.
         Settings.replace_value('accent', accent)
+        if accent == 'nebula':
+            accent = r'data\themes\nebula.json'
 
         # Изменяем тему.
         logger.debug(f"Change theme '{accent}'.")
@@ -206,7 +208,7 @@ class Personalization(metaclass=StaticMeta):
         # Установка акцентного цвета в зависитмости от темы.
         match parsed_theme:
             case 'Light': accent = 'dark-blue'
-            case 'Dark': accent = 'green'
+            case 'Dark': accent = 'nebula'
         Personalization.set_accent(accent)
 
         # Установка цвета для верхней панели приложения.
