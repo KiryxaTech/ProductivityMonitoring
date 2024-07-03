@@ -111,15 +111,20 @@ class Font(CTkFont):
     """
     Класс шрифта.
     """
-    def __init__(self, name: Literal['MenuButton', 'PageTitle', 'SettingBatTitle', 'SettingBarDescription']) -> None:
+    def __init__(self, name: Literal['MenuButton', 'PageTitle', 'SettingBarTitle',
+                                     'SettingBarDescription', 'SettingBarWidgetText']) -> None:
         """
         Инициализирует класс.
 
         Параметры:
         - name (Literal['MenuButton', 'PageTitle', 'SettingBarTitle', 'SettingBarDescription']): Имя шрифта.
         """
-        # Парсинг шрифта.
-        family, size, weight = JsonHelper.read(r'data\fonts.json').get(name)
+        font_list = JsonHelper.read(r'data\fonts.json').get(name)
+        if len(font_list) == 2:
+            family, size = font_list
+            weight = None
+        else:
+            family, size, weight = JsonHelper.read(r'data\fonts.json').get(name)
 
         super().__init__(family, size, weight)
 
@@ -203,28 +208,15 @@ class Personalization(metaclass=StaticMeta):
         logger.debug(f"Change header '{header_color}'.")
         pywinstyles.change_header_color(Personalization.app_instance, header_color)
 
-    def change_theme(theme: Literal['System', 'Light', 'Dark']) -> None:
-        """
-        Применяет тему и акцентный цвет приложения.
+    def set_transparency() -> None:
+        if Personalization.get_transparency() == "on": opacity = .75
+        else: opacity = 1
+        
+        pywinstyles.set_opacity(Personalization.app_instance, opacity)
+        Settings.replace_value('transparency', opacity)
 
-        Параметры:
-        - theme (Literal['System', 'Light', 'Dark']): Тема, которую нужно применить.
-        """
-        logger.debug("Set color theme '%s'", theme)
-
-        # Установка темы.
-        Personalization.set_theme(theme)
-
-        # Парсинг темы.
-        parsed_theme = Personalization.parse_theme(theme)
-        # Установка акцентного цвета в зависитмости от темы.
-        match parsed_theme:
-            case 'Light': accent = 'dark-blue'
-            case 'Dark': accent = 'nebula'
-        Personalization.set_accent(accent)
-
-        # Установка цвета для верхней панели приложения.
-        Personalization.set_header(theme)
+    def get_transparency() -> float:
+        return Settings.get_value('transparency')
 
     def change_default_theme() -> None:
         """

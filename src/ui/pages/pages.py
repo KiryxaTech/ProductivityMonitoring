@@ -120,3 +120,7 @@ class SettingsPage(Page):
                                                 variable_value=Personalization.get_scaling(),
                                                 command=Personalization.set_scaling)
         interface_scaling_bar.add_widget(interface_scaling_widget)
+
+        transparency_mode_bar = SettingBar(self.inner_frame, 'Transparency (β)', 'Window transparency (Beta)')
+        tranparency_mode_widget = SwitchWidget(transparency_mode_bar, Personalization.get_transparency(), Personalization.set_transparency)
+        transparency_mode_bar.add_widget(tranparency_mode_widget)

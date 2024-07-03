@@ -4,10 +4,21 @@ import tkinter as tk
 from typing import Union, List, Tuple, Any
 
 import customtkinter as ctk
-from customtkinter import CTkFont
-from customtkinter import CTkFrame, CTkLabel, CTkOptionMenu
+from customtkinter import CTkFrame, CTkLabel, CTkOptionMenu, CTkSwitch
 
-from programtools import Settings, Color, Font
+from programtools import Color, Font
+
+
+class SwitchWidget(CTkSwitch):
+    def __init__(self,
+                 master: Union[CTkFrame, tk.Tk, ctk.CTk],
+                 variable_value: Any,
+                 command: Any):
+        
+        self._var = tk.Variable(value=variable_value)
+
+        super().__init__(master, text="", command=command, onvalue='on', offvalue='off', variable=self._var)
+
 
 class OptionWidget(CTkOptionMenu):
     def __init__(self,
@@ -21,7 +32,8 @@ class OptionWidget(CTkOptionMenu):
         super().__init__(master=master,
                          values=values,
                          variable=self._var,
-                         command=command)
+                         command=command,
+                         font=Font('SettingBarWidgetText'))
 
 
 class SettingBar(CTkFrame):
