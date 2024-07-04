@@ -164,22 +164,29 @@ class Personalization(metaclass=StaticMeta):
         """
         return Settings.get_value('theme')
 
-    def set_accent(accent: Literal['green', 'dark-blue', 'nebula']) -> None:
+    def set_accent(accent_name: Literal['Nebula']) -> None:
         """
         Применяет тему приложения.
 
         Параметры:
-        - theme (Literal['System', 'Light', 'Dark']): Тема, которую нужно применить.
+        - theme (Literal['Nebula']): Тема, которую нужно применить.
         """
-        logger.debug(f"Get accent color '{accent}'")
+        logger.debug(f"Get accent color '{accent_name}'")
+        
         # Записываем новый акцентный цвет в настройки.
-        Settings.replace_value('accent', accent)
-        if accent == 'nebula':
-            accent = r'data\themes\nebula.json'
+        Settings.replace_value('accent', accent_name)
 
-        # Изменяем тему.
-        logger.debug(f"Change theme '{accent}'.")
-        ctk.set_default_color_theme(accent)
+        themes_directory = 'data\\themes'
+        accent_name_path = f'{themes_directory}\\{accent_name}.json'
+
+        try:
+            ctk.set_default_color_theme(accent_name_path)
+            logger.debug(f"Changed accent '{accent_name} ({accent_name_path})'.")
+        except FileNotFoundError:
+            logger.error(f'{accent_name} theme not found in {themes_directory}')
+
+            ctk.set_default_color_theme('blue')
+            logger.debug(f'Chanded default accent color')
 
     def get_accent() -> Literal['green', 'dark-blue', 'nebula']:
         return Settings.get_value('accent')

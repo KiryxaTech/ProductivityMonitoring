@@ -109,7 +109,7 @@ class SettingsPage(Page):
 
         accent_color_bar = SettingBar(self.inner_frame, 'Accent color', 'Accent color for application elements.')
         accent_color_widget = OptionWidget(master=accent_color_bar,
-                                           values=('nebula', 'dark-blue', 'green'),
+                                           values=('Nebula',),
                                            variable_value=Personalization.get_accent(),
                                            command=Personalization.set_accent)
         accent_color_bar.add_widget(accent_color_widget)
