@@ -1,5 +1,6 @@
 # Авторские права (c) KiryxaTechDev.
 
+import json
 from logging import getLogger
 from typing import Literal, List, Union
 from pathlib import Path
@@ -9,7 +10,6 @@ import darkdetect
 import pywinstyles
 from customtkinter import CTkImage, CTkFont
 from PIL import Image
-from JsonStructor import JsonFile
 
 from .settings import Settings
 from .static_meta import StaticMeta
@@ -30,8 +30,8 @@ class Color:
     """
     Класс цвета, который использует значения из конфигурационного файла.
     """
-    colors_directory = Path(r'data\colors.json')
-    colors_file = JsonFile(colors_directory)
+    colors_directory = f'data\\themes\\{Settings.get_value('accent')}.json'
+    colors_file = json.load(open(colors_directory, 'r', encoding='utf-8'))
 
     def __init__(self, name: Literal['header', 'menu', 'bar', 'menu_button',
                                      'menu_button_hover', 'menu_button_active',
@@ -47,7 +47,7 @@ class Color:
                         'inner_frame', 'separate_line']): Название цвета из предопределенного списка.
         """
         self._name = name
-        self._colors = Color.colors_file.get()
+        self._colors = Color.colors_file['Custom']
         self._value = self._get_color(name)
 
     def __new__(cls, name) -> Union[List[str], str]:
@@ -63,7 +63,7 @@ class Color:
         # Создание нового экземпляра класса.
         instance = super().__new__(cls)
 
-        instance._colors = Color.colors_file.get()
+        instance._colors = Color.colors_file['Custom']
         instance._value = instance._get_color(name)
 
         return instance._value
